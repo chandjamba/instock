@@ -1,0 +1,65 @@
+.header {
+  display: flex;
+  flex-direction: column;
+  height: 200px;
+  background-color: #232940;
+  color: #fff;
+  align-items: center;
+  &__heading {
+    display: flex;
+    width: 128px;
+    height: 28px;
+    margin: 35px 0 30px 0;
+    justify-content: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 25px;
+    padding: 10px;
+  }
+  &__menu {
+    display: flex;
+    flex-direction: row;
+    width: 320px;
+    justify-content: space-between;
+    margin: 15px 0 0 0;
+    &-warehouses {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 120px;
+      height: 20px;
+      padding: 15px 0 15px 0;
+      border: solid;
+      border-radius: 25px;
+      border-width: 2px;
+      border-color: #13182c;
+      background-color: #13182c;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 13px;
+      color: #fff;
+      text-decoration: none;
+    }
+    &-warehouses:hover {
+      border-color: white;
+    }
+    &-inventory {
+      text-decoration: none;
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 120px;
+      height: 20px;
+      padding: 15px 0 15px 0;
+      border: solid;
+      border-radius: 25px;
+      border-width: 2px;
+      border-color: #13182c;
+      background-color: #13182c;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 13px;
+    }
+    &-inventory:hover {
+      border-color: white;
+    }
+  }
+}
