@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "./warehouses.scss";
 
-const url = "http://localhost:8080/api/warehouses";
+const url = "https://instock-api-cj.onrender.com/api/warehouses";
 
 export default function Warehouses() {
   const [warehouses, setWarehouses] = useState();
