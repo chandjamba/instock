@@ -48,8 +48,8 @@ export default function Warehouses() {
                 <div className="warehouse__contact-name">
                   {warehouses?.[0]?.contact_name}
                 </div>
-                <div className="warehouse__contact">
                   <p className="warehouse__contact-heading">CONTACT</p>
+                <div className="warehouse__contact">
                   <p className="warehouse__contact-phone">
                     {warehouses?.[0]?.contact_phone}
                   </p>
@@ -83,8 +83,8 @@ export default function Warehouses() {
                 <div className="warehouse__contact-name">
                   {warehouses?.[1]?.contact_name}
                 </div>
-                <div className="warehouse__contact">
                   <p className="warehouse__contact-heading">CONTACT</p>
+                <div className="warehouse__contact">
                   <p className="warehouse__contact-phone">
                     {warehouses?.[1]?.contact_phone}
                   </p>
@@ -117,8 +117,8 @@ export default function Warehouses() {
                 <div className="warehouse__contact-name">
                   {warehouses?.[2]?.contact_name}
                 </div>
-                <div className="warehouse__contact">
                   <p className="warehouse__contact-heading">CONTACT</p>
+                <div className="warehouse__contact">
                   <p className="warehouse__contact-phone">
                     {warehouses?.[2]?.contact_phone}
                   </p>
@@ -151,8 +151,8 @@ export default function Warehouses() {
                 <div className="warehouse__contact-name">
                   {warehouses?.[3]?.contact_name}
                 </div>
-                <div className="warehouse__contact">
                   <p className="warehouse__contact-heading">CONTACT</p>
+                <div className="warehouse__contact">
                   <p className="warehouse__contact-phone">
                     {warehouses?.[3]?.contact_phone}
                   </p>
@@ -185,8 +185,8 @@ export default function Warehouses() {
                 <div className="warehouse__contact-name">
                   {warehouses?.[4]?.contact_name}
                 </div>
-                <div className="warehouse__contact">
                   <p className="warehouse__contact-heading">CONTACT</p>
+                <div className="warehouse__contact">
                   <p className="warehouse__contact-phone">
                     {warehouses?.[4]?.contact_phone}
                   </p>
@@ -219,8 +219,8 @@ export default function Warehouses() {
                 <div className="warehouse__contact-name">
                   {warehouses?.[5]?.contact_name}
                 </div>
-                <div className="warehouse__contact">
                   <p className="warehouse__contact-heading">CONTACT</p>
+                <div className="warehouse__contact">
                   <p className="warehouse__contact-phone">
                     {warehouses?.[5]?.contact_phone}
                   </p>
@@ -253,8 +253,8 @@ export default function Warehouses() {
                 <div className="warehouse__contact-name">
                   {warehouses?.[6]?.contact_name}
                 </div>
-                <div className="warehouse__contact">
                   <p className="warehouse__contact-heading">CONTACT</p>
+                <div className="warehouse__contact">
                   <p className="warehouse__contact-phone">
                     {warehouses?.[6]?.contact_phone}
                   </p>
@@ -287,8 +287,8 @@ export default function Warehouses() {
                 <div className="warehouse__contact-name">
                   {warehouses?.[7]?.contact_name}
                 </div>
-                <div className="warehouse__contact">
                   <p className="warehouse__contact-heading">CONTACT</p>
+                <div className="warehouse__contact">
                   <p className="warehouse__contact-phone">
                     {warehouses?.[7]?.contact_phone}
                   </p>
