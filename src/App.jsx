@@ -12,7 +12,8 @@ export default function App() {
       <main>
         <Routes>
           <Route path="/" element={<Warehouses />} />
-          <Route path="/inventory" caseSensitive element={<Inventory />} />
+          <Route path="/inventory/" caseSensitive element={<Inventory />} />
+          <Route path="/inventory/:item_name" caseSensitive element={<Inventory />} />
         </Routes>
       </main>
       <Footer />
