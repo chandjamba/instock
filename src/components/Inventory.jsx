@@ -177,7 +177,7 @@ export default function Inventory() {
                 <div className="inventory__category">
                   {inventories?.[4]?.category}
                 </div>
-                <p className="inventory__itemnumber-heading">ITEMNUMBER</p>
+                <p className="inventory__itemnumber-heading">ITEM NUMBER</p>
                 <div className="inventory__item-no">{inventories?.[4]?.id}</div>
               </div>
               <div className="inventory__info-box2">
