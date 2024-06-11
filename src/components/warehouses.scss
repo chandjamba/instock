@@ -80,7 +80,7 @@
   &__info-box1 {
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: space-between;
     width: 180px;
     height: 180px;
   }
@@ -108,7 +108,7 @@
   &__info-box2 {
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: space-between;
     width: 180px;
     height: 180px;
   }
@@ -128,6 +128,17 @@
     align-items: left;
     width: 160px;
     height: 40px;
+    justify-content: left;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 15px;
+  }
+  &__phone-email {
+    display: flex;
+    flex-direction: column;
+    width: 160px;
+    height: 40px;
+    align-items: left;
     justify-content: left;
     font-family: Arial, Helvetica, sans-serif;
     font-weight: bold;
@@ -185,7 +196,6 @@
     color: grey;
     width: 160px;
     height: 25px;
-
   }
   &__name-heading {
     font-family: Arial, Helvetica, sans-serif;

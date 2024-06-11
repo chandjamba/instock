@@ -5,6 +5,7 @@ import Header from "./components/Header";
 import Warehouses from "./components/Warehouses";
 import Inventory from "./components/Inventory";
 import Footer from "./components/Footer";
+import InventoryItemDetail from "./components/InventoryItemDetail";
 export default function App() {
   return (
     <BrowserRouter>
@@ -13,7 +14,11 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Warehouses />} />
           <Route path="/inventory/" caseSensitive element={<Inventory />} />
-          <Route path="/inventory/:item_name" caseSensitive element={<Inventory />} />
+          <Route
+            path="/inventory/:itemId"
+            caseSensitive
+            element={<InventoryItemDetail />}
+          />
         </Routes>
       </main>
       <Footer />
