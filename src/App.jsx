@@ -13,6 +13,10 @@ export default function App() {
       <main>
         <Routes>
           <Route path="/" element={<Warehouses />} />
+          <Route
+            path="/:warehouseId"
+            element={<WarehouseDetail />}
+          />
           <Route path="/inventory/" caseSensitive element={<Inventory />} />
           <Route
             path="/inventory/:itemId"

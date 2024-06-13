@@ -4,22 +4,158 @@
   justify-content: center;
   align-items: center;
   padding: 1rem;
+  background-color: white;
   &__item-details {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    background-color: #f6f6f6;
     width: 100%;
+    height: 100%;
+    justify-content: center;
+    background-color: #f6f6f6;
     border: solid;
     border-radius: 10px;
     border-width: 1px;
-    border-color: white;
+    border-color: #f6f6f6;
     align-items: center;
+  }
+  &__heading-card {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100px;
+    justify-content: space-between;
+    border-bottom: solid;
+    border-width: 1px;
+    border-color: #bdc5d5;
+    padding: 2rem 2rem 2rem 2rem;
+  }
+  &__item-heading {
+    display: flex;
+    width: 50px;
+    height: 35px;
+    font-size: 30px;
+    font-weight: bold;
+    color: black;
+  }
+  &__item-edit {
+    display: flex;
+    width: 80px;
+    height: 30px;
+    align-items: center;
+    justify-content: center;
+    border: solid;
+    border-width: 1px;
+    border-radius: 5px;
+    border-color: grey;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+  }
+  &__item-edit:hover {
+    background-color: #2e66e5;
+    border-color: #f6f6f6;
+  }
+  &__detail-card {
+    display: flex;
+    flex-direction: column;
+    height: 300px;
+    width: 100%;
+    padding: 1rem;
+    justify-content: space-around;
+  }
+  &__iteminfo-box1 {
+    display: flex;
+    flex-direction: column;
+  }
+  &__description-heading {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    font-weight: bold;
+    color: grey;
+    width: 160px;
+    height: 25px;
+  }
+  &__item-description {
+    display: flex;
+    font-family: Arial, Helvetica, sans-serif;
+    color: black;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    font-weight: bold;
+    width: 360px;
+    height: 55px;
+
+  }
+  &__box1-box2-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  &__iteminfo-box2 {
+    display: flex;
+    flex-direction: column;
+    width: 160px;
+    height: 120px;
+    justify-content: space-between;
+  }
+  &__category-heading {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    font-weight: bold;
+    color: grey;
+    width: 160px;
+    height: 25px;
+  }
+  &__item-category {
+    display: flex;
+    font-family: Arial, Helvetica, sans-serif;
+    color: black;
+  }
+  &__status-heading {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    font-weight: bold;
+    color: grey;
+    width: 160px;
+    height: 25px;
+  }
+  &__item-status {
+    display: flex;
+    font-family: Arial, Helvetica, sans-serif;
+    color: rgb(0, 0, 0);
+  }
+  &__iteminfo-box3 {
+    display: flex;
+    flex-direction: column;
+    width: 160px;
+    height: 120px;
+    justify-content: space-between;
+  }
+  &__location-heading {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    font-weight: bold;
+    color: grey;
+    width: 160px;
+    height: 25px;
+  }
+  &__item-warehouse-location {
+    display: flex;
+    font-family: Arial, Helvetica, sans-serif;
+    color: black;
+  }
+  &__quantity-heading {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    font-weight: bold;
+    color: grey;
+    width: 160px;
+    height: 25px;
+  }
+  &__item-quantity {
+    display: flex;
+    font-family: Arial, Helvetica, sans-serif;
+    color: black;
   }
 }
 
-.heading__editBtn-container {
-    display: flex;
-    flex-direction: row;
-    width: 300px;
-}
+

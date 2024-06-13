@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import "./warehouses.scss";
+import { Link } from "react-router-dom";
 
 const url = "https://instock-api-cj.onrender.com/api/warehouses";
 
@@ -33,9 +34,9 @@ export default function Warehouses() {
                 <div className="warehouse__info">
                   <div className="warehouse__info-box1">
                     <p className="warehouse__heading">WAREHOUSE</p>
-                    <div className="warehouse__location">
+                    <Link className="warehouse__location">
                       {warehouse?.warehouse_name}
-                    </div>
+                    </Link>
                     <p className="warehouse__address-heading">ADDRESS</p>
                     <div className="warehouse__address">
                       {warehouse?.address}, {warehouse?.city},{" "}
