@@ -17,7 +17,6 @@
   border-width: 1px;
   border-color: white;
   align-items: center;
-  padding: 1rem;
   &__heading-card {
     display: flex;
     flex-direction: row;
@@ -188,7 +187,7 @@
   }
 
   // card section inventories for same warehouses. //
-  
+
   &__inventories {
     display: flex;
     flex-direction: column;
@@ -198,7 +197,6 @@
     border-bottom: solid;
     border-color: lightgrey;
     border-width: 1px;
-
   }
   &__inventories-card {
     display: flex;
@@ -209,7 +207,6 @@
     border-bottom: solid;
     border-color: lightgrey;
     border-width: 1px;
-   
   }
   &__info-containers {
     display: flex;
@@ -234,10 +231,16 @@
     height: 25px;
   }
   &__inventory-item-name {
-    font-family: Arial, Helvetica, sans-serif;
-    color: black;
+    color: #2e66e5;
     width: 150px;
     height: 25px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 15px;
+    text-decoration: none;
+  }
+  &__inventory-item-name:hover {
+    text-decoration: underline;
   }
   &__inventory-category-heading {
     font-family: Arial, Helvetica, sans-serif;
@@ -249,6 +252,8 @@
   }
   &__inventory-category {
     font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 15px;
     color: black;
     width: 150px;
     height: 25px;
@@ -270,6 +275,8 @@
   }
   &__inventory-status {
     font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 15px;
     color: black;
     width: 150px;
     height: 25px;
@@ -284,9 +291,10 @@
   }
   &__inventory-quantity {
     font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    font-weight: bold;
     color: black;
     width: 150px;
     height: 25px;
   }
 }
-
