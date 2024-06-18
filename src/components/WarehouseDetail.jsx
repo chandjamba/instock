@@ -37,7 +37,7 @@ export default function WarehouseDetail() {
             {warehouseDetail?.warehouse_name}
           </h1>
           <Link
-            to={`/warehouse/:warehouseId/edit`}
+            to={`/warehouse/${warehouseId}/edit`}
             className="warehouse__editBtn"
           >
             Edit

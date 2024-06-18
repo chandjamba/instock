@@ -9,6 +9,16 @@ import InventoryItemDetail from "./components/InventoryItemDetail";
 import WarehouseDetail from "./components/WarehouseDetail";
 import EditWarehouse from "./components/EditWarehouse";
 
+// let a = "/warehouse/:warehouseId/edit";
+// let b = a.split("/");
+// console.log("array of route i defined", b);
+// let index = b.findIndex((item) => item.startsWith(":"))
+// console.log("index i should be looking for", index);
+// let c = window.location.pathname
+// let d = c.split("/");
+// console.log("array of route browser have defined", d);
+// console.log(d[2]);
+
 export default function App() {
   return (
     <BrowserRouter>

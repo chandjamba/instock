@@ -44,13 +44,15 @@
     border: solid;
     border-width: 1px;
     border-radius: 5px;
-    border-color: grey;
+    border-color: lightgrey;
     font-family: Arial, Helvetica, sans-serif;
     font-weight: bold;
+    color: black;
+    text-decoration: none;
   }
   &__editBtn:hover {
     background-color: #2e66e5;
-    border-color: #f6f6f6;
+    border-color: #2e66e5;
   }
   &__info-card {
     display: flex;

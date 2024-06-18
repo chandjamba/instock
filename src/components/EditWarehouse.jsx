@@ -11,11 +11,11 @@ export default function EditWarehouse() {
       const url = `https://instock-api-cj.onrender.com/api/warehouses/${warehouseId}`;
       const resp = await fetch(url);
       const data = await resp.json();
-      console.log(data);
       setEditWarehouse(data);
     }
     fetchedEditWarehouse();
   }, [warehouseId]);
+  console.log(editWarehouse);
   return (
     <div className="editWarehouses">
       <div className="editWarehouse">
@@ -35,8 +35,22 @@ export default function EditWarehouse() {
               <input
                 className="editWarehouse__name-input"
                 type="text"
-                placeholder=""
-              ></input>
+                placeholder="Warehouse name..."
+                value={editWarehouse?.warehouse_name}
+                onChange={(event) => {
+                  console.log(event.target.value);
+                  // setEditWarehouse({
+                  //   ...editWarehouse,
+                  //   warehouse_name: event.target.value,
+                  // });
+                  setEditWarehouse((pureState) => {
+                    return {
+                      ...pureState,
+                      warehouse_name: event.target.value,
+                    };
+                  });
+                }}
+              />
             </div>
 
             <div className="editWarehouse__street-address-input-section">
@@ -44,7 +58,8 @@ export default function EditWarehouse() {
               <input
                 className="editWarehouse__street-address-input"
                 type="text"
-                placeholder=""
+                placeholder="Address"
+                value={editWarehouse?.address}
               ></input>
             </div>
 
@@ -53,7 +68,8 @@ export default function EditWarehouse() {
               <input
                 className="editWarehouse__city-input"
                 type="text"
-                placeholder=""
+                placeholder="City"
+                value={editWarehouse?.city}
               ></input>
             </div>
 
@@ -62,7 +78,8 @@ export default function EditWarehouse() {
               <input
                 className="editWarehouse__country-input"
                 type="text"
-                placeholder=""
+                placeholder="Country"
+                value={editWarehouse?.country}
               ></input>
             </div>
           </div>
@@ -81,7 +98,8 @@ export default function EditWarehouse() {
               <input
                 className="editWarehouse__contact-name-input"
                 type="text"
-                placeholder=""
+                placeholder="Name"
+                value={editWarehouse?.contact_name}
               ></input>
             </div>
 
@@ -90,7 +108,8 @@ export default function EditWarehouse() {
               <input
                 className="editWarehouse__contact-position-input"
                 type="text"
-                placeholder=""
+                placeholder="position"
+                value={editWarehouse?.contact_position}
               ></input>
             </div>
 
@@ -99,7 +118,8 @@ export default function EditWarehouse() {
               <input
                 className="editWarehouse__contact-number-input"
                 type="text"
-                placeholder=""
+                placeholder="Phone number"
+                value={editWarehouse?.contact_number}
               ></input>
             </div>
 
@@ -108,7 +128,8 @@ export default function EditWarehouse() {
               <input
                 className="editWarehouse__contact-email-input"
                 type="text"
-                placeholder=""
+                placeholder="Email"
+                value={editWarehouse?.contact_email}
               ></input>
             </div>
           </div>
