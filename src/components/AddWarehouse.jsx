@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./addWarehouse.scss/";
+import { Link } from "react-router-dom";
 
 export default function AddWarehouse() {
   const [addWarehouse, setAddWarehouse] = useState();
@@ -191,11 +192,13 @@ export default function AddWarehouse() {
         </div>
 
         <div className="addWarehouse__buttons-container">
-          <div className="ediWarehouse__cancel-btn-container">
-            <button className="addWarehouse__cancel-btn">Cancel</button>
+          <div className="addWarehouse__cancel-btn-container">
+            <Link to={"/"} className="addWarehouse__cancel-btn">
+              Cancel
+            </Link>
           </div>
 
-          <div className="ediWarehouse__save-btn-container">
+          <div className="addWarehouse__save-btn-container">
             <button className="addWarehouse__save-btn">Save</button>
           </div>
         </div>

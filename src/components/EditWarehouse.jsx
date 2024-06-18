@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import "./editWarehouse.scss";
 
 export default function EditWarehouse() {
@@ -205,7 +205,9 @@ export default function EditWarehouse() {
 
         <div className="editWarehouse__buttons-container">
           <div className="ediWarehouse__cancel-btn-container">
-            <button className="editWarehouse__cancel-btn">Cancel</button>
+            <Link to={`/`} className="editWarehouse__cancel-btn">
+              Cancel
+            </Link>
           </div>
 
           <div className="ediWarehouse__save-btn-container">

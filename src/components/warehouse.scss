@@ -38,6 +38,9 @@
     padding: 10px;
     width: 295px;
   }
+  &__input:hover {
+    border-color: lightgrey;
+  }
   &__add-btn {
     display: flex;
     border: solid;
@@ -51,6 +54,9 @@
     background-color: #2e66e5;
     color: white;
     text-decoration: none;
+  }
+  &__add-btn:hover {
+    border-color: white;
   }
 
   &-card1,
@@ -164,10 +170,12 @@
     border-width: 1px;
     border-radius: 5px;
     border-color: lightgrey;
+    color: black;
   }
   &-delete:hover {
-    background-color: #c94515;
-    border-color: grey;
+    background-color: #ff411b;
+    border-color: #ff411b;
+    color: white;
   }
   &-edit {
     display: flex;
@@ -180,10 +188,13 @@
     border-radius: 5px;
     border-color: lightgrey;
     font-family: Arial, Helvetica, sans-serif;
+    text-decoration: none;
+    color: black;
   }
   &-edit:hover {
     background-color: #2e66e5;
-    border-color: lightgrey;
+    border-color: #2e66e5;
+    color: white;
   }
   &__heading {
     font-family: Arial, Helvetica, sans-serif;

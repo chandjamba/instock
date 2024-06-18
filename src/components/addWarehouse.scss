@@ -308,14 +308,16 @@
   }
   &__cancel-btn-container {
     display: flex;
-    height: 125px;
-    width: 180px;
+    height: 30px;
+    width: 120px;
+    align-items: center;
+    justify-content: center;
   }
   &__cancel-btn {
     display: flex;
     color: black;
     height: 40px;
-    width: 120px;
+    width: 100px;
     border: solid;
     border-width: 1px;
     border-color: lightgrey;
@@ -326,6 +328,7 @@
     font-size: 18px;
     font-family: Arial, Helvetica, sans-serif;
     background-color: white;
+    text-decoration: none;
   }
   &__cancel-btn:hover {
     background-color: #2e66e5;
@@ -334,14 +337,16 @@
   }
   &__save-btn-container {
     display: flex;
-    height: 25px;
-    width: 80px;
+    height: 30px;
+    width: 120px;
+    align-items: center;
+    justify-content: center;
   }
   &__save-btn {
     display: flex;
     color: black;
     height: 40px;
-    width: 120px;
+    width: 100px;
     border: solid;
     border-width: 1px;
     border-color: lightgrey;

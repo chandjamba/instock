@@ -9,6 +9,7 @@ import InventoryItemDetail from "./components/InventoryItemDetail";
 import WarehouseDetail from "./components/WarehouseDetail";
 import EditWarehouse from "./components/EditWarehouse";
 import AddWarehouse from "./components/AddWarehouse";
+import EditInventory from "./components/EditInventoryItem";
 
 // let a = "/warehouse/:warehouseId/edit";
 // let b = a.split("/");
@@ -33,12 +34,14 @@ export default function App() {
             path="/warehouse/:warehouseId/edit"
             element={<EditWarehouse />}
           />
+
           <Route path="/inventory/" caseSensitive element={<Inventory />} />
           <Route
             path="/inventory/:itemId"
             caseSensitive
             element={<InventoryItemDetail />}
           />
+          <Route path="/inventory/:itemId/edit" element={<EditInventory />} />
         </Routes>
       </main>
       <Footer />

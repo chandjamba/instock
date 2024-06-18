@@ -23,7 +23,12 @@ export default function InventoryItemDetail() {
           <h1 className="inventoryDet__item-heading">
             {inventoryItemDetail?.item_name}
           </h1>
-          <button className="inventoryDet__item-edit">Edit</button>
+          <Link
+            to={`/inventory/${itemId}/edit`}
+            className="inventoryDet__item-edit"
+          >
+            Edit
+          </Link>
         </div>
         <div className="inventoryDet__detail-card">
           <div className="inventoryDet__iteminfo-box1">
