@@ -25,8 +25,11 @@ export default function Warehouse() {
           className="warehouse__input"
           type="text"
           placeholder="Search..."
-        ></input>
-        <button className="warehouse__add-btn"> + Add New Warehouse</button>
+        />
+        <Link to={"/warehouse/addWarehouse"} className="warehouse__add-btn">
+          {" "}
+          + Add New Warehouse
+        </Link>
         <div className="warehouses__list">
           {warehouses?.map((warehouse) => {
             return (

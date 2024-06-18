@@ -8,6 +8,7 @@ import Footer from "./components/Footer";
 import InventoryItemDetail from "./components/InventoryItemDetail";
 import WarehouseDetail from "./components/WarehouseDetail";
 import EditWarehouse from "./components/EditWarehouse";
+import AddWarehouse from "./components/AddWarehouse";
 
 // let a = "/warehouse/:warehouseId/edit";
 // let b = a.split("/");
@@ -26,8 +27,12 @@ export default function App() {
       <main>
         <Routes>
           <Route path="/" element={<Warehouse />} />
+          <Route path="/warehouse/addWarehouse" element={<AddWarehouse />} />
           <Route path="/warehouse/:warehouseId" element={<WarehouseDetail />} />
-          <Route path="/warehouse/:warehouseId/edit" element={<EditWarehouse />} />
+          <Route
+            path="/warehouse/:warehouseId/edit"
+            element={<EditWarehouse />}
+          />
           <Route path="/inventory/" caseSensitive element={<Inventory />} />
           <Route
             path="/inventory/:itemId"

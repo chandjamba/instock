@@ -38,7 +38,7 @@ export default function EditWarehouse() {
                 placeholder="Warehouse name..."
                 value={editWarehouse?.warehouse_name}
                 onChange={(event) => {
-                  console.log(event.target.value);
+                  // console.log(event.target.value);
                   // setEditWarehouse({
                   //   ...editWarehouse,
                   //   warehouse_name: event.target.value,
@@ -60,7 +60,17 @@ export default function EditWarehouse() {
                 type="text"
                 placeholder="Address"
                 value={editWarehouse?.address}
-              ></input>
+                onChange={(event) => {
+                  console.log(event.target.value);
+
+                  setEditWarehouse((pureState) => {
+                    return {
+                      ...pureState,
+                      address: event.target.value,
+                    };
+                  });
+                }}
+              />
             </div>
 
             <div className="editWarehouse__city-input-section">
@@ -70,7 +80,20 @@ export default function EditWarehouse() {
                 type="text"
                 placeholder="City"
                 value={editWarehouse?.city}
-              ></input>
+                onChange={(event) => {
+                  console.log(event.target.value);
+                  // setEditWarehouse({
+                  //   ...editWarehouse,
+                  //   city: event.target.value,
+                  // });
+                  setEditWarehouse((pureState) => {
+                    return {
+                      ...pureState,
+                      city: event.target.value,
+                    };
+                  });
+                }}
+              />
             </div>
 
             <div className="editWarehouse__country-input-section">
@@ -80,7 +103,16 @@ export default function EditWarehouse() {
                 type="text"
                 placeholder="Country"
                 value={editWarehouse?.country}
-              ></input>
+                onChange={(event) => {
+                  console.log(event.target.value);
+                  setEditWarehouse((pureState) => {
+                    return {
+                      ...pureState,
+                      country: event.target.value,
+                    };
+                  });
+                }}
+              />
             </div>
           </div>
         </div>
@@ -100,7 +132,16 @@ export default function EditWarehouse() {
                 type="text"
                 placeholder="Name"
                 value={editWarehouse?.contact_name}
-              ></input>
+                onChange={(event) => {
+                  console.log(event.target.value);
+                  setEditWarehouse((pureState) => {
+                    return {
+                      ...pureState,
+                      contact_name: event.target.value,
+                    };
+                  });
+                }}
+              />
             </div>
 
             <div className="editWarehouse__contact-position-input-section">
@@ -110,7 +151,16 @@ export default function EditWarehouse() {
                 type="text"
                 placeholder="position"
                 value={editWarehouse?.contact_position}
-              ></input>
+                onChange={(event) => {
+                  console.log(event.target.value);
+                  setEditWarehouse((pureState) => {
+                    return {
+                      ...pureState,
+                      contact_position: event.target.value,
+                    };
+                  });
+                }}
+              />
             </div>
 
             <div className="editWarehouse__contact-number-input-section">
@@ -119,8 +169,17 @@ export default function EditWarehouse() {
                 className="editWarehouse__contact-number-input"
                 type="text"
                 placeholder="Phone number"
-                value={editWarehouse?.contact_number}
-              ></input>
+                value={editWarehouse?.contact_phone}
+                onChange={(event) => {
+                  console.log(event.target.value);
+                  setEditWarehouse((pureState) => {
+                    return {
+                      ...pureState,
+                      contact_number: event.target.value,
+                    };
+                  });
+                }}
+              />
             </div>
 
             <div className="editWarehouse__contact-email-input-section">
@@ -130,7 +189,16 @@ export default function EditWarehouse() {
                 type="text"
                 placeholder="Email"
                 value={editWarehouse?.contact_email}
-              ></input>
+                onChange={(event) => {
+                  console.log(event.target.value);
+                  setEditWarehouse((pureState) => {
+                    return {
+                      ...pureState,
+                      contact_email: event.target.value,
+                    };
+                  });
+                }}
+              />
             </div>
           </div>
         </div>

@@ -1,0 +1,361 @@
+.addWarehouses {
+  display: flex;
+  flex: column;
+  width: 100%;
+  height: 100%;
+  padding: 1rem;
+}
+
+.addWarehouse {
+  display: flex;
+  flex-direction: column;
+  justify-self: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background-color: #f6f6f6;
+  border-top: solid;
+  border-radius: 10px 10px 0 0;
+  border-width: 1px;
+  border-top-color: #f6f6f6;
+
+  &__heading-card {
+    display: flex;
+    justify-content: center;
+    height: 100px;
+    width: 100%;
+    border-bottom: solid;
+    border-width: 1px;
+    border-color: lightgrey;
+  }
+  &__main-heading {
+    display: flex;
+    font-family: Arial, Helvetica, sans-serif;
+    color: black;
+    align-items: center;
+  }
+
+  // Warehouse Details Styling.//
+  &__details {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    font-family: Arial, Helvetica, sans-serif;
+    color: black;
+    font-size: 12px;
+    border-bottom: solid;
+    border-width: 1px;
+    border-color: lightgrey;
+  }
+  &__details-heading {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    width: 100%;
+    height: 90px;
+    justify-content: end;
+  }
+  &__details-heading-text {
+    display: flex;
+    width: 100%;
+    height: 40px;
+    align-items: center;
+  }
+  &__details-input-section {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 500px;
+    justify-content: space-around;
+  }
+  &__name-input-section {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    width: 100%;
+  }
+  &__name {
+    display: flex;
+    width: 50%;
+    height: 40px;
+    color: black;
+    font-size: 18px;
+    font-weight: bold;
+    align-items: center;
+  }
+  &__name-input {
+    display: flex;
+    width: 100%;
+    border: solid;
+    border-width: 1px;
+    border-radius: 20px;
+    border-color: lightgrey;
+    padding: 10px;
+  }
+  &__street-address-input-section {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    width: 100%;
+  }
+  &__street-address {
+    display: flex;
+    width: 50%;
+    height: 40px;
+    color: black;
+    font-size: 18px;
+    font-weight: bold;
+    align-items: center;
+  }
+  &__street-address-input {
+    display: flex;
+    width: 100%;
+    border: solid;
+    border-radius: 20px;
+    border-color: lightgrey;
+    border-width: 1px;
+    padding: 10px;
+  }
+  &__city-input-section {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    width: 100%;
+  }
+  &__city {
+    display: flex;
+    width: 50%;
+    height: 40px;
+    color: black;
+    font-size: 18px;
+    font-weight: bold;
+    align-items: center;
+  }
+  &__city-input {
+    display: flex;
+    width: 100%;
+    border: solid;
+    border-width: 1px;
+    border-radius: 20px;
+    border-color: lightgrey;
+    padding: 10px;
+  }
+  &__country-input-section {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    width: 100%;
+  }
+  &__country {
+    display: flex;
+    width: 50%;
+    height: 40px;
+    color: black;
+    font-size: 18px;
+    font-weight: bold;
+    align-items: center;
+  }
+  &__country-input {
+    display: flex;
+    width: 100%;
+    border: solid;
+    border-width: 1px;
+    border-radius: 20px;
+    border-color: lightgrey;
+    padding: 10px;
+  }
+
+  //Warehouse Contact Details Styling.//
+  &__contact-details {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    font-family: Arial, Helvetica, sans-serif;
+    color: black;
+    font-size: 12px;
+    border-bottom: solid;
+    border-width: 1px;
+    border-color: lightgrey;
+  }
+  &__contact-details-heading {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    width: 100%;
+    height: 90px;
+    justify-content: end;
+  }
+  &__contact-details-heading-text {
+    display: flex;
+    width: 100%;
+    height: 40px;
+    align-items: center;
+  }
+  &__contact-details-input-section {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 500px;
+    justify-content: space-around;
+  }
+  &__contact-name-input-section {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    width: 100%;
+  }
+  &__contact-name {
+    display: flex;
+    width: 50%;
+    height: 40px;
+    color: black;
+    font-size: 18px;
+    font-weight: bold;
+    align-items: center;
+  }
+  &__contact-name-input {
+    display: flex;
+    width: 100%;
+    border: solid;
+    border-width: 1px;
+    border-radius: 20px;
+    border-color: lightgrey;
+    padding: 10px;
+  }
+  &__contact-position-input-section {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    width: 100%;
+  }
+  &__contact-position {
+    display: flex;
+    width: 50%;
+    height: 40px;
+    color: black;
+    font-size: 18px;
+    font-weight: bold;
+    align-items: center;
+  }
+  &__contact-position-input {
+    display: flex;
+    width: 100%;
+    border: solid;
+    border-radius: 20px;
+    border-color: lightgrey;
+    border-width: 1px;
+    padding: 10px;
+  }
+  &__contact-number-input-section {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    width: 100%;
+  }
+  &__contact-number {
+    display: flex;
+    width: 50%;
+    height: 40px;
+    color: black;
+    font-size: 18px;
+    font-weight: bold;
+    align-items: center;
+  }
+  &__contact-number-input {
+    display: flex;
+    width: 100%;
+    border: solid;
+    border-width: 1px;
+    border-radius: 20px;
+    border-color: lightgrey;
+    padding: 10px;
+  }
+  &__contact-email-input-section {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    width: 100%;
+  }
+  &__contact-email {
+    display: flex;
+    width: 50%;
+    height: 40px;
+    color: black;
+    font-size: 18px;
+    font-weight: bold;
+    align-items: center;
+  }
+  &__contact-email-input {
+    display: flex;
+    width: 100%;
+    border: solid;
+    border-width: 1px;
+    border-radius: 20px;
+    border-color: lightgrey;
+    padding: 10px;
+  }
+
+  // Cancel and Save Buttons Styling. //
+  &__buttons-container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100px;
+    justify-content: space-around;
+    align-items: center;
+  }
+  &__cancel-btn-container {
+    display: flex;
+    height: 125px;
+    width: 180px;
+  }
+  &__cancel-btn {
+    display: flex;
+    color: black;
+    height: 40px;
+    width: 120px;
+    border: solid;
+    border-width: 1px;
+    border-color: lightgrey;
+    border-radius: 25px;
+    align-items: center;
+    justify-content: center;
+    font-weight: 10px;
+    font-size: 18px;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: white;
+  }
+  &__cancel-btn:hover {
+    background-color: #2e66e5;
+    border-color: #2e66e5;
+    color: white;
+  }
+  &__save-btn-container {
+    display: flex;
+    height: 25px;
+    width: 80px;
+  }
+  &__save-btn {
+    display: flex;
+    color: black;
+    height: 40px;
+    width: 120px;
+    border: solid;
+    border-width: 1px;
+    border-color: lightgrey;
+    border-radius: 25px;
+    align-items: center;
+    justify-content: center;
+    font-weight: 10px;
+    font-size: 18px;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: white;
+  }
+  &__save-btn:hover {
+    background-color: #2e66e5;
+    border-color: #2e66e5;
+    color: white;
+  }
+}
