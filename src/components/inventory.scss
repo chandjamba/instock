@@ -68,6 +68,7 @@
     margin: 10px 0 10px 0;
     background-color: #2e66e5;
     color: white;
+    text-decoration: none;
   }
   &__add-btn:hover {
     border-color: #f6f6f6;
@@ -207,8 +208,9 @@
   }
 
   &-delete:hover {
-    background-color: #c94515;
-    border-color: grey;
+    background-color: #ff411b;
+    border-color: #ff411b;
+    color: white;
   }
 
   &-edit {
@@ -227,6 +229,7 @@
   &-edit:hover {
     background-color: #2e66e5;
     border-color: lightgrey;
+    color: white;
   }
 
   &__item-heading {

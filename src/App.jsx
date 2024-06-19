@@ -10,6 +10,8 @@ import WarehouseDetail from "./components/WarehouseDetail";
 import EditWarehouse from "./components/EditWarehouse";
 import AddWarehouse from "./components/AddWarehouse";
 import EditInventory from "./components/EditInventoryItem";
+import AddInventoryItem from "./components/AddInventoryItem";
+import WarehouseDelete from "./components/WarehouseDelete";
 
 // let a = "/warehouse/:warehouseId/edit";
 // let b = a.split("/");
@@ -34,8 +36,13 @@ export default function App() {
             path="/warehouse/:warehouseId/edit"
             element={<EditWarehouse />}
           />
+          <Route
+            path="/warehouse/:warehouseId/delete"
+            element={<WarehouseDelete />}
+          />
 
           <Route path="/inventory/" caseSensitive element={<Inventory />} />
+          <Route path="/inventory/addInventoryItem" element={<AddInventoryItem />} />
           <Route
             path="/inventory/:itemId"
             caseSensitive

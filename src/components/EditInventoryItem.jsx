@@ -1,8 +1,22 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./editInventoryItem.scss";
+import { useParams } from "react-router-dom";
 
 export default function EditInventoryItem() {
   const [editInventoryItem, setEditInventoryItem] = useState();
+  const {itemId} = useParams();
+
+  useEffect(()=> {
+    async function fetchedEditInventoryItem() {
+      const url = `https://instock-api-cj.onrender.com/api/inventories/${itemId}`;
+      const resp = await fetch(url);
+      const data = await resp.json();
+      console.log(data);
+      setEditInventoryItem(data);
+    }
+    fetchedEditInventoryItem();
+  },[itemId])
+
   return (
     <div className="editInventoryItems">
       <div className="editInventoryItem">
@@ -26,7 +40,7 @@ export default function EditInventoryItem() {
                 className="editInventoryItem__name-input"
                 type="text"
                 placeholder="Item name..."
-                value={editInventoryItem?.warehouse_name}
+                value={editInventoryItem?.item_name}
                 onChange={(event) => {
                   // console.log(event.target.value);
                   // setEditInventoryItemItem({
@@ -36,7 +50,7 @@ export default function EditInventoryItem() {
                   setEditInventoryItem((pureState) => {
                     return {
                       ...pureState,
-                      warehouse_name: event.target.value,
+                      item_name: event.target.value,
                     };
                   });
                 }}
@@ -50,14 +64,14 @@ export default function EditInventoryItem() {
                 type="text"
                 placeholder="Description..."
                 rows={5}
-                value={editInventoryItem?.address}
+                value={editInventoryItem?.description}
                 onChange={(event) => {
                   console.log(event.target.value);
 
                   setEditInventoryItem((pureState) => {
                     return {
                       ...pureState,
-                      address: event.target.value,
+                     description: event.target.value,
                     };
                   });
                 }}
@@ -95,9 +109,9 @@ export default function EditInventoryItem() {
           <div className="editInventoryItem__availability-input-section">
             <div className="editInventoryItem__status-input-section">
               <div className="editInventoryItem__status">Status</div>
-              <div
-                className="editInventory"
-                // <input
+              
+              <div className="editInvnetory__Status-inputs">
+              <input  
                 className="editInventoryItem__status-input"
                 type="checkbox"
                 value={editInventoryItem?.contact_name}
@@ -111,6 +125,27 @@ export default function EditInventoryItem() {
                   });
                 }}
               />
+              </div>
+            </div>
+
+            <div className="editInventoryItem__quantity-input-section">
+              <div className="editInventoryItem__quantity">Quantity</div>
+              
+              <input  
+                className="editInventoryItem__quantity-input"
+                type="text"
+                placeholder="Quantity..."
+                value={editInventoryItem?.quantity}
+                onChange={(event) => {
+                  console.log(event.target.value);
+                  setEditInventoryItem((pureState) => {
+                    return {
+                      ...pureState,
+                      quantity: event.target.value,
+                    };
+                  });
+                }}
+              />
             </div>
 
             <div className="editInventoryItem__warehouse-input-section">
@@ -119,13 +154,13 @@ export default function EditInventoryItem() {
                 className="editInventoryItem__warehouse-select-input"
                 type="text"
                 placeholder="Select..."
-                value={editInventoryItem?.contact_position}
+                value={editInventoryItem?.warehouse_name}
                 onChange={(event) => {
                   console.log(event.target.value);
                   setEditInventoryItem((pureState) => {
                     return {
                       ...pureState,
-                      contact_position: event.target.value,
+                      warehouse_name: event.target.value,
                     };
                   });
                 }}

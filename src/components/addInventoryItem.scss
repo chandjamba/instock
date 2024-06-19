@@ -1,0 +1,315 @@
+.addInventoryItems {
+    display: flex;
+    flex: column;
+    width: 100%;
+    height: 100%;
+    padding: 1rem;
+  }
+  
+  .addInventoryItem {
+    display: flex;
+    flex-direction: column;
+    justify-self: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background-color: #f6f6f6;
+    border-top: solid;
+    border-radius: 10px 10px 0 0;
+    border-width: 1px;
+    border-top-color: #f6f6f6;
+  
+    &__heading-card {
+      display: flex;
+      justify-content: center;
+      height: 100px;
+      width: 100%;
+      border-bottom: solid;
+      border-width: 1px;
+      border-color: lightgrey;
+    }
+    &__main-heading {
+      display: flex;
+      font-family: Arial, Helvetica, sans-serif;
+      color: black;
+      align-items: center;
+    }
+  
+    // Warehouse Details Styling.//
+    &__details {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      width: 100%;
+      font-family: Arial, Helvetica, sans-serif;
+      color: black;
+      font-size: 12px;
+      border-bottom: solid;
+      border-width: 1px;
+      border-color: lightgrey;
+    }
+    &__details-heading {
+      display: flex;
+      flex-direction: column;
+      padding: 1rem;
+      width: 100%;
+      height: 90px;
+      justify-content: end;
+    }
+    &__details-heading-text {
+      display: flex;
+      width: 100%;
+      height: 40px;
+      align-items: center;
+    }
+    &__details-input-section {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      height: 400px;
+      justify-content: space-around;
+    }
+    &__name-input-section {
+      display: flex;
+      flex-direction: column;
+      padding: 1rem;
+      width: 100%;
+    }
+    &__name {
+      display: flex;
+      width: 50%;
+      height: 40px;
+      color: black;
+      font-size: 18px;
+      font-weight: bold;
+      align-items: center;
+    }
+    &__name-input {
+      display: flex;
+      width: 100%;
+      border: solid;
+      border-width: 1px;
+      border-radius: 20px;
+      border-color: lightgrey;
+      padding: 10px;
+    }
+    &__description-input-section {
+      display: flex;
+      flex-direction: column;
+      padding: 1rem;
+      width: 100%;
+    }
+    &__description {
+      display: flex;
+      width: 50%;
+      height: 40px;
+      color: black;
+      font-size: 18px;
+      font-weight: bold;
+      align-items: center;
+    }
+    &__description-input {
+      display: flex;
+      width: 100%;
+      border: solid;
+      border-radius: 20px;
+      border-color: lightgrey;
+      border-width: 1px;
+      padding: 10px;
+      align-items: center;
+    }
+    &__category-input-section {
+      display: flex;
+      flex-direction: column;
+      padding: 1rem;
+      width: 100%;
+    }
+    &__category {
+      display: flex;
+      width: 50%;
+      height: 40px;
+      color: black;
+      font-size: 18px;
+      font-weight: bold;
+      align-items: center;
+    }
+    &__category-input {
+      display: flex;
+      width: 100%;
+      border: solid;
+      border-width: 1px;
+      border-radius: 20px;
+      border-color: lightgrey;
+      padding: 10px;
+    }
+  
+    //Inventory Items Details Styling.//
+    &__availability-details {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      width: 100%;
+      font-family: Arial, Helvetica, sans-serif;
+      color: black;
+      font-size: 12px;
+      border-bottom: solid;
+      border-width: 1px;
+      border-color: lightgrey;
+    }
+    &__availability-details-heading {
+      display: flex;
+      flex-direction: column;
+      padding: 1rem;
+      width: 100%;
+      height: 90px;
+      justify-content: end;
+    }
+    &__availability-details-heading-text {
+      display: flex;
+      width: 100%;
+      height: 40px;
+      align-items: center;
+    }
+    &__availability-input-section {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      height: 400px;
+      justify-content: space-around;
+    }
+    &__status-input-section {
+      display: flex;
+      flex-direction: column;
+      padding: 1rem;
+    }
+    &__status {
+      display: flex;
+      height: 40px;
+      color: black;
+      font-size: 18px;
+      font-weight: bold;
+      align-items: center;
+    }
+    &__status-input {
+      display: flex;
+      border: solid;
+      border-width: 1px;
+      border-radius: 20px;
+      border-color: lightgrey;
+      justify-content: left;
+      width: 20px;
+    }
+    &__quantity-input-section {
+      display: flex;
+      flex-direction: column;
+      padding: 1rem;
+      width: 100%;
+    }
+    &__quantity {
+      display: flex;
+      width: 50%;
+      height: 40px;
+      color: black;
+      font-size: 18px;
+      font-weight: bold;
+      align-items: center;
+    }
+    &__quantity-input {
+      display: flex;
+      width: 100%;
+      border: solid;
+      border-radius: 20px;
+      border-color: lightgrey;
+      border-width: 1px;
+      padding: 10px;
+    }
+    
+    &__warehouse-input-section {
+      display: flex;
+      flex-direction: column;
+      padding: 1rem;
+      width: 100%;
+    }
+    &__warehouse {
+      display: flex;
+      width: 50%;
+      height: 40px;
+      color: black;
+      font-size: 18px;
+      font-weight: bold;
+      align-items: center;
+    }
+    &__warehouse-select-input {
+      display: flex;
+      width: 100%;
+      border: solid;
+      border-radius: 20px;
+      border-color: lightgrey;
+      border-width: 1px;
+      padding: 10px;
+    }
+  
+    // Cancel and Save Buttons Styling. //
+    &__buttons-container {
+      display: flex;
+      flex-direction: row;
+      width: 100%;
+      height: 100px;
+      justify-content: space-around;
+      align-items: center;
+    }
+    &__cancel-btn-container {
+      display: flex;
+      height: 125px;
+      width: 180px;
+    }
+    &__cancel-btn {
+      display: flex;
+      color: black;
+      height: 40px;
+      width: 120px;
+      border: solid;
+      border-width: 1px;
+      border-color: lightgrey;
+      border-radius: 25px;
+      align-items: center;
+      justify-content: center;
+      font-weight: 10px;
+      font-size: 18px;
+      font-family: Arial, Helvetica, sans-serif;
+      background-color: white;
+    }
+    &__cancel-btn:hover {
+      background-color: #ff411b;
+      border-color: #ff411b;
+      color: white;
+    }
+   
+    &__save-btn-container {
+      display: flex;
+      height: 25px;
+      width: 80px;
+    }
+    &__save-btn {
+      display: flex;
+      color: black;
+      height: 40px;
+      width: 120px;
+      border: solid;
+      border-width: 1px;
+      border-color: lightgrey;
+      border-radius: 25px;
+      align-items: center;
+      justify-content: center;
+      font-weight: 10px;
+      font-size: 18px;
+      font-family: Arial, Helvetica, sans-serif;
+      background-color: white;
+    }
+    &__save-btn:hover {
+      background-color: #2e66e5;
+      border-color: #2e66e5;
+      color: white;
+    }
+  }
+  

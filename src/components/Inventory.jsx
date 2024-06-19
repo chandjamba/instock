@@ -26,7 +26,9 @@ export default function Inventory() {
             type="text"
             placeholder="Search..."
           ></input>
-          <button className="inventory__add-btn"> + Add New Item</button>
+          <Link 
+          to={"/inventory/addInventoryItem"}
+          className="inventory__add-btn"> + Add New Item</Link>
         </div>
         <div className="inventories__list">
           {inventories?.map((inventory) => {
@@ -56,9 +58,11 @@ export default function Inventory() {
                       {inventory?.quantity}
                     </div>
                     <p className="inventory__heading">WAREHOUSE</p>
-                    <div className="inventory__location">
+                    <Link 
+                    to={`/warehouse/${inventory?.warehouse_name}`}
+                    className="inventory__location">
                       {inventory?.warehouse_name}
-                    </div>
+                    </Link>
                   </div>
                 </div>
                 <div className="inventory__card-btn">
