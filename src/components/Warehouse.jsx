@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react";
 import "./warehouse.scss";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const url = "https://instock-api-cj.onrender.com/api/warehouses";
 
 export default function Warehouse() {
   const [warehouses, setWarehouses] = useState();
-  const { warehouseId } = useParams();
 
   useEffect(() => {
     async function fetchedWarehousesData() {
@@ -67,9 +66,12 @@ export default function Warehouse() {
                   </div>
                 </div>
                 <div className="warehouse__card-btn">
-                  <Link 
-                  to={`/warehouse/${warehouse?.id}/delete`}
-                  className="warehouse-delete">Delete</Link>
+                  <Link
+                    to={`/warehouse/${warehouse?.id}/delete`}
+                    className="warehouse-delete"
+                  >
+                    Delete
+                  </Link>
                   <Link
                     to={`warehouse/${warehouse?.id}/edit`}
                     className="warehouse-edit"
