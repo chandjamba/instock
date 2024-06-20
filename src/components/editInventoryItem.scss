@@ -239,7 +239,7 @@
     font-weight: bold;
     align-items: center;
   }
-  &__warehouse-select-input {
+  &__warehouse-input {
     display: flex;
     width: 100%;
     border: solid;
@@ -247,6 +247,48 @@
     border-color: lightgrey;
     border-width: 1px;
     padding: 10px;
+  }
+  &__status {
+    display: flex;
+    height: 40px;
+    color: black;
+    font-size: 18px;
+    font-weight: bold;
+    align-items: center;
+  }
+  &__status-inputs {
+    display: flex;
+    flex-direction: row;      
+    justify-content: center;
+    width: 300px;
+    height: 50px;
+    justify-content: space-between;  
+    align-items: center;
+  }
+  &__instock {
+    display: flex;
+    flex-direction: row;
+    width: 90px;
+    height: 50px;
+    color: black;
+    align-items: center;
+    justify-content: space-around;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    font-weight: bold;
+
+  }
+  &__outofstock {
+    display: flex;
+    flex-direction: row;
+    width: 120px;
+    height: 50px;
+    color: black;
+    align-items: center;
+    justify-content: space-around;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    font-weight: bold;
   }
 
   // Cancel and Save Buttons Styling. //
@@ -260,14 +302,16 @@
   }
   &__cancel-btn-container {
     display: flex;
-    height: 125px;
-    width: 180px;
+    height: 30px;
+    width: 120px;
+    align-items: center;
+    justify-content: center;
   }
   &__cancel-btn {
     display: flex;
     color: black;
     height: 40px;
-    width: 120px;
+    width: 100px;
     border: solid;
     border-width: 1px;
     border-color: lightgrey;
@@ -278,6 +322,7 @@
     font-size: 18px;
     font-family: Arial, Helvetica, sans-serif;
     background-color: white;
+    text-decoration: none;
   }
   &__cancel-btn:hover {
     background-color: #ff411b;
@@ -286,14 +331,16 @@
   }
   &__save-btn-container {
     display: flex;
-    height: 25px;
-    width: 80px;
+    height: 30px;
+    width: 120px;
+    align-items: center;
+    justify-content: center;
   }
   &__save-btn {
     display: flex;
     color: black;
     height: 40px;
-    width: 120px;
+    width: 100px;
     border: solid;
     border-width: 1px;
     border-color: lightgrey;

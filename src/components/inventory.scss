@@ -204,7 +204,11 @@
     border: solid;
     border-width: 1px;
     border-radius: 5px;
+    font-family: Arial, Helvetica, sans-serif;
     border-color: lightgrey;
+    text-decoration: none;
+    color: black;
+    background-color: white;
   }
 
   &-delete:hover {
@@ -223,6 +227,9 @@
     border-width: 1px;
     border-radius: 5px;
     border-color: lightgrey;
+    text-decoration: none;
+    background-color: white;
+    color: black;
     font-family: Arial, Helvetica, sans-serif;
   }
 

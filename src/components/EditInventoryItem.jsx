@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import "./editInventoryItem.scss";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 export default function EditInventoryItem() {
   const [editInventoryItem, setEditInventoryItem] = useState();
@@ -110,21 +110,16 @@ export default function EditInventoryItem() {
             <div className="editInventoryItem__status-input-section">
               <div className="editInventoryItem__status">Status</div>
               
-              <div className="editInvnetory__Status-inputs">
-              <input  
-                className="editInventoryItem__status-input"
-                type="checkbox"
-                value={editInventoryItem?.contact_name}
-                onChange={(event) => {
-                  console.log(event.target.value);
-                  setEditInventoryItem((pureState) => {
-                    return {
-                      ...pureState,
-                      contact_name: event.target.value,
-                    };
-                  });
-                }}
-              />
+              <div className="editInventoryItem__status-inputs">
+                <div className="editInventoryItem__instock">
+              <input type="radio" name="status" value="In-Stock" onClick={e=> setInventoryStatus(e.target.value)}/>
+              <p>In Stock</p>
+              </div>
+
+              <div className="editInventoryItem__outofstock">
+              <input type="radio" name="status" value="Out of Stock" onClick={e=> setInventoryStatus(e.target.value)}/>
+              <p>Out of Stock</p>
+              </div>
               </div>
             </div>
 
@@ -151,7 +146,7 @@ export default function EditInventoryItem() {
             <div className="editInventoryItem__warehouse-input-section">
               <p className="editInventoryItem__warehouse">Warehouse</p>
               <input
-                className="editInventoryItem__warehouse-select-input"
+                className="editInventoryItem__warehouse-input"
                 type="text"
                 placeholder="Select..."
                 value={editInventoryItem?.warehouse_name}
@@ -170,11 +165,13 @@ export default function EditInventoryItem() {
         </div>
 
         <div className="editInventoryItem__buttons-container">
-          <div className="ediWarehouse__cancel-btn-container">
-            <button className="editInventoryItem__cancel-btn">Cancel</button>
+          <div className="editInventoryItem__cancel-btn-container">
+            <Link 
+            to={"/inventory/"}
+            className="editInventoryItem__cancel-btn">Cancel</Link>
           </div>
 
-          <div className="ediWarehouse__save-btn-container">
+          <div className="editInventoryItem__save-btn-container">
             <button className="editInventoryItem__save-btn">Save</button>
           </div>
         </div>

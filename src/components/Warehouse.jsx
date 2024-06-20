@@ -68,10 +68,10 @@ export default function Warehouse() {
                 </div>
                 <div className="warehouse__card-btn">
                   <Link 
-                  to={`/warehouse/${warehouseId}/delete`}
+                  to={`/warehouse/${warehouse?.id}/delete`}
                   className="warehouse-delete">Delete</Link>
                   <Link
-                    to={`./warehouse/${warehouseId}/edit`}
+                    to={`warehouse/${warehouse?.id}/edit`}
                     className="warehouse-edit"
                   >
                     Edit

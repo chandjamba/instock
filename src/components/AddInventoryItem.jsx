@@ -1,8 +1,10 @@
 import { useState } from "react";
 import "./addInventoryItem.scss";
+import { Link } from "react-router-dom";
 
 export default function AddInventoryItem() {
     const [addInventoryItem, setAddInventoryItem] = useState();
+    const [inventoryStatus, setInventoryStatus] = useState();
     return (
         <div className="addInventoryItems">
       <div className="addInventoryItem">
@@ -96,22 +98,18 @@ export default function AddInventoryItem() {
             <div className="addInventoryItem__status-input-section">
               <div className="addInventoryItem__status">Status</div>
               
-              <div className="editInvnetory__Status-inputs">
-              <input  
-                className="addInventoryItem__status-input"
-                type="checkbox"
-                value={addInventoryItem?.contact_name}
-                onChange={(event) => {
-                  console.log(event.target.value);
-                  setAddInventoryItem((pureState) => {
-                    return {
-                      ...pureState,
-                      contact_name: event.target.value,
-                    };
-                  });
-                }}
-              />
+              <div className="addInventoryItem__status-inputs">
+                <div className="addInventoryItem__instock">
+              <input type="radio" name="status" value="In-Stock" onClick={e=> setInventoryStatus(e.target.value)}/>
+              <p>In Stock</p>
               </div>
+
+              <div className="addInventoryItem__outofstock">
+              <input type="radio" name="status" value="Out of Stock" onClick={e=> setInventoryStatus(e.target.value)}/>
+              <p>Out of Stock</p>
+              </div>
+              </div>
+
             </div>
 
             <div className="addInventoryItem__quantity-input-section">
@@ -156,11 +154,13 @@ export default function AddInventoryItem() {
         </div>
 
         <div className="addInventoryItem__buttons-container">
-          <div className="ediWarehouse__cancel-btn-container">
-            <button className="addInventoryItem__cancel-btn">Cancel</button>
+          <div className="addInventoryItem__cancel-btn-container">
+            <Link 
+            to={"/inventory/"}
+            className="addInventoryItem__cancel-btn">Cancel</Link>
           </div>
 
-          <div className="ediWarehouse__save-btn-container">
+          <div className="addInventoryItem__save-btn-container">
             <button className="addInventoryItem__save-btn">Save</button>
           </div>
         </div>

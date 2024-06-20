@@ -66,8 +66,12 @@ export default function Inventory() {
                   </div>
                 </div>
                 <div className="inventory__card-btn">
-                  <button className="inventory-delete">Delete</button>
-                  <button className="inventory-edit">Edit</button>
+                  <Link 
+                  to={`/inventory/${inventory?.id}/delete`}
+                  className="inventory-delete">Delete</Link>
+                  <Link 
+                  to={`/inventory/${inventory?.id}/edit`}
+                  className="inventory-edit">Edit</Link>
                 </div>
               </div>
             );
