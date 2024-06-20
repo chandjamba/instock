@@ -3,10 +3,10 @@ import "./addInventoryItem.scss";
 import { Link } from "react-router-dom";
 
 export default function AddInventoryItem() {
-    const [addInventoryItem, setAddInventoryItem] = useState();
-    const [inventoryStatus, setInventoryStatus] = useState();
-    return (
-        <div className="addInventoryItems">
+  const [addInventoryItem, setAddInventoryItem] = useState();
+
+  return (
+    <div className="addInventoryItems">
       <div className="addInventoryItem">
         <div className="addInventoryItem__heading-card">
           <h1 className="addInventoryItem__main-heading">
@@ -31,7 +31,7 @@ export default function AddInventoryItem() {
                 value={addInventoryItem?.warehouse_name}
                 onChange={(event) => {
                   // console.log(event.target.value);
-                  // setaddInventoryItemItem({
+                  // setAddInventoryItemItem({
                   //   ...addInventoryItem,
                   //   warehouse_name: event.target.value,
                   // });
@@ -68,21 +68,7 @@ export default function AddInventoryItem() {
 
             <div className="addInventoryItem__category-input-section">
               <p className="addInventoryItem__category">Category</p>
-              <input
-                className="addInventoryItem__category-input"
-                type="text"
-                placeholder="Select..."
-                value={addInventoryItem?.country}
-                onChange={(event) => {
-                  console.log(event.target.value);
-                  setAddInventoryItem((pureState) => {
-                    return {
-                      ...pureState,
-                      country: event.target.value,
-                    };
-                  });
-                }}
-              />
+              <Select categoryOptions={categoryOptions} />
             </div>
           </div>
         </div>
@@ -97,25 +83,50 @@ export default function AddInventoryItem() {
           <div className="addInventoryItem__availability-input-section">
             <div className="addInventoryItem__status-input-section">
               <div className="addInventoryItem__status">Status</div>
-              
+
               <div className="addInventoryItem__status-inputs">
-                <div className="addInventoryItem__instock">
-              <input type="radio" name="status" value="In-Stock" onClick={e=> setInventoryStatus(e.target.value)}/>
-              <p>In Stock</p>
-              </div>
+                <label htmlFor="In Stock">
+                  <input
+                    id="In Stock"
+                    type="radio"
+                    name="status"
+                    value={addInventoryItem?.status}
+                    onChange={(e) =>
+                      setAddInventoryItem((pureState) => {
+                        return {
+                          ...pureState,
+                          status: e.target.value,
+                        };
+                      })
+                    }
+                  />
+                  <p>In Stock</p>
+                </label>
 
-              <div className="addInventoryItem__outofstock">
-              <input type="radio" name="status" value="Out of Stock" onClick={e=> setInventoryStatus(e.target.value)}/>
-              <p>Out of Stock</p>
+                <label htmlFor="Out of Stock">
+                  <input
+                    id="Out of Stock"
+                    type="radio"
+                    name="status"
+                    value={addInventoryItem?.inventoryStatus}
+                    onChange={(e) =>
+                      setAddInventoryItem((pureState) => {
+                        return {
+                          ...pureState,
+                          status: e.target.value,
+                        };
+                      })
+                    }
+                  />
+                  <p>Out of Stock</p>
+                </label>
               </div>
-              </div>
-
             </div>
 
             <div className="addInventoryItem__quantity-input-section">
               <div className="addInventoryItem__quantity">Quantity</div>
-              
-              <input  
+
+              <input
                 className="addInventoryItem__quantity-input"
                 type="text"
                 placeholder="Quantity..."
@@ -155,9 +166,9 @@ export default function AddInventoryItem() {
 
         <div className="addInventoryItem__buttons-container">
           <div className="addInventoryItem__cancel-btn-container">
-            <Link 
-            to={"/inventory/"}
-            className="addInventoryItem__cancel-btn">Cancel</Link>
+            <Link to={"/inventory/"} className="addInventoryItem__cancel-btn">
+              Cancel
+            </Link>
           </div>
 
           <div className="addInventoryItem__save-btn-container">
@@ -166,5 +177,5 @@ export default function AddInventoryItem() {
         </div>
       </div>
     </div>
-    )
+  );
 }

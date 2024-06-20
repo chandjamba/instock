@@ -4,19 +4,19 @@ import { Link, useParams } from "react-router-dom";
 
 export default function EditInventoryItem() {
   const [editInventoryItem, setEditInventoryItem] = useState();
-  const {itemId} = useParams();
+  const { itemId } = useParams();
 
-  useEffect(()=> {
+  useEffect(() => {
     async function fetchedEditInventoryItem() {
       const url = `https://instock-api-cj.onrender.com/api/inventories/${itemId}`;
       const resp = await fetch(url);
       const data = await resp.json();
-      console.log(data);
       setEditInventoryItem(data);
     }
     fetchedEditInventoryItem();
-  },[itemId])
+  }, [itemId]);
 
+  console.log(editInventoryItem);
   return (
     <div className="editInventoryItems">
       <div className="editInventoryItem">
@@ -71,7 +71,7 @@ export default function EditInventoryItem() {
                   setEditInventoryItem((pureState) => {
                     return {
                       ...pureState,
-                     description: event.target.value,
+                      description: event.target.value,
                     };
                   });
                 }}
@@ -109,24 +109,52 @@ export default function EditInventoryItem() {
           <div className="editInventoryItem__availability-input-section">
             <div className="editInventoryItem__status-input-section">
               <div className="editInventoryItem__status">Status</div>
-              
-              <div className="editInventoryItem__status-inputs">
-                <div className="editInventoryItem__instock">
-              <input type="radio" name="status" value="In-Stock" onClick={e=> setInventoryStatus(e.target.value)}/>
-              <p>In Stock</p>
-              </div>
 
-              <div className="editInventoryItem__outofstock">
-              <input type="radio" name="status" value="Out of Stock" onClick={e=> setInventoryStatus(e.target.value)}/>
-              <p>Out of Stock</p>
-              </div>
+              <div className="editInventoryItem__status-inputs">
+                <label htmlFor="In_Stock">
+                  <input
+                    id="In_Stock"
+                    type="radio"
+                    name="status"
+                    value={"In Stock"}
+                    checked={editInventoryItem?.status == "In Stock"}
+                    onChange={(e) =>
+                      setEditInventoryItem((pureState) => {
+                        return {
+                          ...pureState,
+                          status: e.target.value,
+                        };
+                      })
+                    }
+                  />
+                  In Stock
+                </label>
+
+                <label htmlFor="Out_of_Stock">
+                  <input
+                    id="Out_of_Stock"
+                    type="radio"
+                    name="status"
+                    value={"Out of Stock"}
+                    checked={editInventoryItem?.status == "Out of Stock"}
+                    onChange={(e) =>
+                      setEditInventoryItem((pureState) => {
+                        return {
+                          ...pureState,
+                          status: e.target.value,
+                        };
+                      })
+                    }
+                  />
+                  Out of Stock
+                </label>
               </div>
             </div>
 
             <div className="editInventoryItem__quantity-input-section">
               <div className="editInventoryItem__quantity">Quantity</div>
-              
-              <input  
+
+              <input
                 className="editInventoryItem__quantity-input"
                 type="text"
                 placeholder="Quantity..."
@@ -166,9 +194,9 @@ export default function EditInventoryItem() {
 
         <div className="editInventoryItem__buttons-container">
           <div className="editInventoryItem__cancel-btn-container">
-            <Link 
-            to={"/inventory/"}
-            className="editInventoryItem__cancel-btn">Cancel</Link>
+            <Link to={"/inventory/"} className="editInventoryItem__cancel-btn">
+              Cancel
+            </Link>
           </div>
 
           <div className="editInventoryItem__save-btn-container">
