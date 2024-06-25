@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 
 export default function AddInventoryItem() {
   const [addInventoryItem, setAddInventoryItem] = useState();
+  const [select, setSelect] = useState();
 
   return (
     <div className="addInventoryItems">
@@ -68,7 +69,18 @@ export default function AddInventoryItem() {
 
             <div className="addInventoryItem__category-input-section">
               <p className="addInventoryItem__category">Category</p>
-              <Select categoryOptions={categoryOptions} />
+              <select
+                className="addInventoryItem__category-input"
+                value={select}
+                placeholder="Select"
+                onChange={(e) => setSelect(e.target.value)}
+              >
+                <option>Electronics</option>
+                <option>Apparel</option>
+                <option>Gear</option>
+                <option>Accessories</option>
+                <option>Health</option>
+              </select>
             </div>
           </div>
         </div>
@@ -145,21 +157,21 @@ export default function AddInventoryItem() {
 
             <div className="addInventoryItem__warehouse-input-section">
               <p className="addInventoryItem__warehouse">Warehouse</p>
-              <input
+              <select
                 className="addInventoryItem__warehouse-select-input"
-                type="text"
-                placeholder="Select..."
-                value={addInventoryItem?.contact_position}
-                onChange={(event) => {
-                  console.log(event.target.value);
-                  setAddInventoryItem((pureState) => {
-                    return {
-                      ...pureState,
-                      contact_position: event.target.value,
-                    };
-                  });
-                }}
-              />
+                placeholder="Select"
+                value={select}
+                onChange={(e) => setSelect(e.target.value)}
+              >
+                <option>Boston</option>
+                <option>Jersey</option>
+                <option>Manhattan</option>
+                <option>Miami</option>
+                <option>San Francisco</option>
+                <option>Santa Monica</option>
+                <option>Seattle</option>
+                <option>Washington</option>
+              </select>
             </div>
           </div>
         </div>

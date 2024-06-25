@@ -26,11 +26,15 @@ export default function Inventory() {
             type="text"
             placeholder="Search..."
           ></input>
-          <Link 
-          to={"/inventory/addInventoryItem"}
-          className="inventory__add-btn"> + Add New Item</Link>
+          <Link
+            to={"/inventory/addInventoryItem"}
+            className="inventory__add-btn"
+          >
+            {" "}
+            + Add New Item
+          </Link>
         </div>
-        <div className="inventories__list">
+        <div className="inventories__list" key={inventories?.id}>
           {inventories?.map((inventory) => {
             return (
               <div className="inventory-card1" key={inventories.id}>
@@ -58,20 +62,27 @@ export default function Inventory() {
                       {inventory?.quantity}
                     </div>
                     <p className="inventory__heading">WAREHOUSE</p>
-                    <Link 
-                    to={`/warehouse/${inventory?.warehouse_name}`}
-                    className="inventory__location">
+                    <Link
+                      to={`/warehouse/${inventory?.warehouse_name}`}
+                      className="inventory__location"
+                    >
                       {inventory?.warehouse_name}
                     </Link>
                   </div>
                 </div>
                 <div className="inventory__card-btn">
-                  <Link 
-                  to={`/inventory/${inventory?.id}/delete`}
-                  className="inventory-delete">Delete</Link>
-                  <Link 
-                  to={`/inventory/${inventory?.id}/edit`}
-                  className="inventory-edit">Edit</Link>
+                  <Link
+                    to={`/inventory/${inventory?.id}/delete`}
+                    className="inventory-delete"
+                  >
+                    Delete
+                  </Link>
+                  <Link
+                    to={`/inventory/${inventory?.id}/edit`}
+                    className="inventory-edit"
+                  >
+                    Edit
+                  </Link>
                 </div>
               </div>
             );

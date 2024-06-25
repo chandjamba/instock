@@ -1,9 +1,15 @@
 import { useState } from "react";
 import "./addWarehouse.scss/";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 export default function AddWarehouse() {
   const [addWarehouse, setAddWarehouse] = useState();
+  async function createWarehouse() {
+    const url = "https://instock-api-cj.onrender.com/api/warehouses";
+    const response = await axios.post(url, addWarehouse);
+    console.log(response, "parsedData");
+  }
   return (
     <div className="addWarehouses">
       <div className="addWarehouse">
@@ -163,7 +169,7 @@ export default function AddWarehouse() {
                   setAddWarehouse((pureState) => {
                     return {
                       ...pureState,
-                      contact_number: event.target.value,
+                      contact_phone: event.target.value,
                     };
                   });
                 }}
@@ -199,7 +205,12 @@ export default function AddWarehouse() {
           </div>
 
           <div className="addWarehouse__save-btn-container">
-            <button className="addWarehouse__save-btn">Save</button>
+            <button
+              className="addWarehouse__save-btn"
+              onClick={createWarehouse}
+            >
+              Save
+            </button>
           </div>
         </div>
       </div>

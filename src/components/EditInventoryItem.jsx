@@ -4,6 +4,7 @@ import { Link, useParams } from "react-router-dom";
 
 export default function EditInventoryItem() {
   const [editInventoryItem, setEditInventoryItem] = useState();
+
   const { itemId } = useParams();
 
   useEffect(() => {
@@ -80,21 +81,26 @@ export default function EditInventoryItem() {
 
             <div className="editInventoryItem__category-input-section">
               <p className="editInventoryItem__category">Category</p>
-              <input
+              <select
                 className="editInventoryItem__category-input"
-                type="text"
-                placeholder="Select..."
-                value={editInventoryItem?.country}
+                value={editInventoryItem?.category}
+                placeholder="Select"
                 onChange={(event) => {
                   console.log(event.target.value);
                   setEditInventoryItem((pureState) => {
                     return {
                       ...pureState,
-                      country: event.target.value,
-                    };
-                  });
+                      category: event.target.value
+                    }
+                  })
                 }}
-              />
+              >
+                <option>Electronics</option>
+                <option>Apparel</option>
+                <option>Gear</option>
+                <option>Accessories</option>
+                <option>Health</option>
+              </select>
             </div>
           </div>
         </div>
@@ -173,11 +179,10 @@ export default function EditInventoryItem() {
 
             <div className="editInventoryItem__warehouse-input-section">
               <p className="editInventoryItem__warehouse">Warehouse</p>
-              <input
+              <select
                 className="editInventoryItem__warehouse-input"
-                type="text"
-                placeholder="Select..."
                 value={editInventoryItem?.warehouse_name}
+                placeholder="Select"
                 onChange={(event) => {
                   console.log(event.target.value);
                   setEditInventoryItem((pureState) => {
@@ -187,7 +192,16 @@ export default function EditInventoryItem() {
                     };
                   });
                 }}
-              />
+              >
+                <option>Boston</option>
+                <option>Jersey</option>
+                <option>Manhattan</option>
+                <option>Miami</option>
+                <option>San Francisco</option>
+                <option>Santa Monica</option>
+                <option>Seattle</option>
+                <option>Washington</option>
+              </select>
             </div>
           </div>
         </div>
