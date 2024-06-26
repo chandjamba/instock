@@ -1,6 +1,7 @@
 import { Link, useParams } from "react-router-dom"
 import "./inventoryItemDelete.scss";
 import { useEffect, useState } from "react";
+import axios from "axios";
 
 export default function InventoryItemDelete() {
     const [inventoryItemDelete, setInventoryItemDelete] = useState();
@@ -16,6 +17,12 @@ export default function InventoryItemDelete() {
         }
         fetchedInventoryItemDelete();
     },[itemId]);
+
+async function deleteInventoryItem() {
+  const url = `https://instock-api-cj.onrender.com/api/inventories/${itemId}`;
+  const resp = await axios.delete(url);
+  console.log(resp, "parsedData");
+}
 
     return (
         <div className="inventoryItemDelete">
@@ -41,7 +48,9 @@ export default function InventoryItemDelete() {
           </div>
 
           <div className="inventoryItemDelete__delete-btn-container">
-            <button className="inventoryItemDelete__delete-btn">Save</button>
+            <button 
+            onClick={deleteInventoryItem}
+            className="inventoryItemDelete__delete-btn">Delete</button>
           </div>
         </div>
         </div>

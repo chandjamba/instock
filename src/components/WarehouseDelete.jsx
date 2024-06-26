@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import "./warehouseDelete.scss";
 import { Link, useParams } from "react-router-dom";
+import axios from "axios";
 
 export default function WarehouseDelete() {
     const [warehouseDelete, setWarehouseDelete] = useState();
@@ -16,6 +17,12 @@ export default function WarehouseDelete() {
       }
       fetchedWarehouseDelete();
     },[])
+
+    async function deleteWarehouse() {
+      const url = `https://instock-api-cj.onrender.com/api/warehouses/${warehouseId}`;
+      const resp = await axios.delete(url);
+      console.log(resp, "parsedData");
+    }
 
     return (
         <div className="warehouseDelete">
@@ -41,7 +48,10 @@ export default function WarehouseDelete() {
           </div>
 
           <div className="warehouseDelete__delete-btn-container">
-            <button className="warehouseDelete__delete-btn">Delete</button>
+            <button 
+            className="warehouseDelete__delete-btn"
+            onClick={deleteWarehouse}
+            >Delete</button>
           </div>
         </div>
         </div>

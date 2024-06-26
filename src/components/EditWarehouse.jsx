@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import "./editWarehouse.scss";
+import axios from "axios";
 
 export default function EditWarehouse() {
   const [editWarehouse, setEditWarehouse] = useState();
@@ -16,6 +17,13 @@ export default function EditWarehouse() {
     fetchedEditWarehouse();
   }, [warehouseId]);
   console.log(editWarehouse);
+
+async function editedWarehouse() {
+  const url = `https://instock-api-cj.onrender.com/api/warehouses/${warehouseId}`;
+  const resp = await axios.put(url, editWarehouse);
+  console.log(resp, "parsedData")
+}
+
   return (
     <div className="editWarehouses">
       <div className="editWarehouse">
@@ -211,7 +219,9 @@ export default function EditWarehouse() {
           </div>
 
           <div className="ediWarehouse__save-btn-container">
-            <button className="editWarehouse__save-btn">Save</button>
+            <button 
+            onClick={editedWarehouse}
+            className="editWarehouse__save-btn">Save</button>
           </div>
         </div>
       </div>

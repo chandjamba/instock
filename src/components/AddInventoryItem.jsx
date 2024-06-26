@@ -1,10 +1,17 @@
 import { useState } from "react";
 import "./addInventoryItem.scss";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 export default function AddInventoryItem() {
   const [addInventoryItem, setAddInventoryItem] = useState();
   const [select, setSelect] = useState();
+
+  async function createInventoryItem() {
+    const url = "https://instock-api-cj.onrender.com/api/inventories";
+    const resp = await axios.post(url, addInventoryItem);
+    console.log(resp, "parsedData");
+  }
 
   return (
     <div className="addInventoryItems">
@@ -184,7 +191,9 @@ export default function AddInventoryItem() {
           </div>
 
           <div className="addInventoryItem__save-btn-container">
-            <button className="addInventoryItem__save-btn">Save</button>
+            <button 
+            onClick={createInventoryItem}
+            className="addInventoryItem__save-btn">Save</button>
           </div>
         </div>
       </div>
