@@ -41,7 +41,7 @@ export default function WarehouseDelete() {
           </div>
 
           <div className="warehouseDelete__delete-btn-container">
-            <button className="warehouseDelete__delete-btn">Save</button>
+            <button className="warehouseDelete__delete-btn">Delete</button>
           </div>
         </div>
         </div>
