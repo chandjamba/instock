@@ -1,15 +1,28 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./addInventoryItem.scss";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 export default function AddInventoryItem() {
   const [addInventoryItem, setAddInventoryItem] = useState();
-  const [select, setSelect] = useState();
+  const [warehousesList, setWarehousesList] = useState([]);
+  const navigate = useNavigate();
+  useEffect(() => {
+    async function fetchedWarehouseId() {
+      const url = "https://instock-api-cj.onrender.com/api/warehouses";
+      const resp = await fetch(url);
+      const data = await resp.json();
+      console.log(data);
+      setWarehousesList(data);
+    }
+
+    fetchedWarehouseId();
+  }, []);
 
   async function createInventoryItem() {
     const url = "https://instock-api-cj.onrender.com/api/inventories";
     const resp = await axios.post(url, addInventoryItem);
+    navigate(`/inventory/${resp.data.id}`);
     console.log(resp, "parsedData");
   }
 
@@ -36,7 +49,7 @@ export default function AddInventoryItem() {
                 className="addInventoryItem__name-input"
                 type="text"
                 placeholder="Item name..."
-                value={addInventoryItem?.warehouse_name}
+                value={addInventoryItem?.item_name}
                 onChange={(event) => {
                   // console.log(event.target.value);
                   // setAddInventoryItemItem({
@@ -46,7 +59,7 @@ export default function AddInventoryItem() {
                   setAddInventoryItem((pureState) => {
                     return {
                       ...pureState,
-                      warehouse_name: event.target.value,
+                      item_name: event.target.value,
                     };
                   });
                 }}
@@ -60,14 +73,14 @@ export default function AddInventoryItem() {
                 type="text"
                 placeholder="Description..."
                 rows={5}
-                value={addInventoryItem?.address}
+                value={addInventoryItem?.description}
                 onChange={(event) => {
                   console.log(event.target.value);
 
                   setAddInventoryItem((pureState) => {
                     return {
                       ...pureState,
-                      address: event.target.value,
+                      description: event.target.value,
                     };
                   });
                 }}
@@ -78,9 +91,17 @@ export default function AddInventoryItem() {
               <p className="addInventoryItem__category">Category</p>
               <select
                 className="addInventoryItem__category-input"
-                value={select}
+                value={addInventoryItem?.category}
                 placeholder="Select"
-                onChange={(e) => setSelect(e.target.value)}
+                onChange={(event) => {
+                  console.log(event.target.value);
+                  setAddInventoryItem((pureState) => {
+                    return {
+                      ...pureState,
+                      category: event.target.value,
+                    };
+                  });
+                }}
               >
                 <option>Electronics</option>
                 <option>Apparel</option>
@@ -110,11 +131,11 @@ export default function AddInventoryItem() {
                     type="radio"
                     name="status"
                     value={addInventoryItem?.status}
-                    onChange={(e) =>
+                    onChange={() =>
                       setAddInventoryItem((pureState) => {
                         return {
                           ...pureState,
-                          status: e.target.value,
+                          status: "In Stock",
                         };
                       })
                     }
@@ -128,11 +149,11 @@ export default function AddInventoryItem() {
                     type="radio"
                     name="status"
                     value={addInventoryItem?.inventoryStatus}
-                    onChange={(e) =>
+                    onChange={() =>
                       setAddInventoryItem((pureState) => {
                         return {
                           ...pureState,
-                          status: e.target.value,
+                          status: "Out of Stock",
                         };
                       })
                     }
@@ -149,13 +170,13 @@ export default function AddInventoryItem() {
                 className="addInventoryItem__quantity-input"
                 type="text"
                 placeholder="Quantity..."
-                value={addInventoryItem?.contact_name}
+                value={addInventoryItem?.quantity}
                 onChange={(event) => {
                   console.log(event.target.value);
                   setAddInventoryItem((pureState) => {
                     return {
                       ...pureState,
-                      contact_name: event.target.value,
+                      quantity: parseInt(event.target.value),
                     };
                   });
                 }}
@@ -167,17 +188,24 @@ export default function AddInventoryItem() {
               <select
                 className="addInventoryItem__warehouse-select-input"
                 placeholder="Select"
-                value={select}
-                onChange={(e) => setSelect(e.target.value)}
+                value={addInventoryItem?.warehouse_id}
+                onChange={(event) => {
+                  console.log(event.target.value);
+                  setAddInventoryItem((pureState) => {
+                    return {
+                      ...pureState,
+                      warehouse_id: event.target.value,
+                    };
+                  });
+                }}
               >
-                <option>Boston</option>
-                <option>Jersey</option>
-                <option>Manhattan</option>
-                <option>Miami</option>
-                <option>San Francisco</option>
-                <option>Santa Monica</option>
-                <option>Seattle</option>
-                <option>Washington</option>
+                {warehousesList.map((warehouse) => {
+                  return (
+                    <option value={warehouse?.id} key={warehouse?.id}>
+                      {warehouse?.warehouse_name}
+                    </option>
+                  );
+                })}
               </select>
             </div>
           </div>
@@ -191,9 +219,12 @@ export default function AddInventoryItem() {
           </div>
 
           <div className="addInventoryItem__save-btn-container">
-            <button 
-            onClick={createInventoryItem}
-            className="addInventoryItem__save-btn">Save</button>
+            <button
+              onClick={createInventoryItem}
+              className="addInventoryItem__save-btn"
+            >
+              Save
+            </button>
           </div>
         </div>
       </div>
