@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import "./editInventoryItem.scss";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import axios from "axios";
 
 export default function EditInventoryItem() {
   const [editInventoryItem, setEditInventoryItem] = useState();
-
+  const navigate = useNavigate();
   const { itemId } = useParams();
 
   useEffect(() => {
@@ -18,6 +19,15 @@ export default function EditInventoryItem() {
   }, [itemId]);
 
   console.log(editInventoryItem);
+
+  async function saveEditInventoryItem() {
+    const url = "https://instock-api-cj.onrender.com/api/inventories";
+    const resp = await axios.post(url, editInventoryItem);
+    const data = resp;
+    navigate(`/inventory/${resp.data.id}`);
+    console.log(data, "parsedData");
+  }
+
   return (
     <div className="editInventoryItems">
       <div className="editInventoryItem">
@@ -90,9 +100,9 @@ export default function EditInventoryItem() {
                   setEditInventoryItem((pureState) => {
                     return {
                       ...pureState,
-                      category: event.target.value
-                    }
-                  })
+                      category: event.target.value,
+                    };
+                  });
                 }}
               >
                 <option>Electronics</option>
@@ -170,7 +180,7 @@ export default function EditInventoryItem() {
                   setEditInventoryItem((pureState) => {
                     return {
                       ...pureState,
-                      quantity: event.target.value,
+                      quantity: parseInt(event.target.value),
                     };
                   });
                 }}
@@ -214,7 +224,12 @@ export default function EditInventoryItem() {
           </div>
 
           <div className="editInventoryItem__save-btn-container">
-            <button className="editInventoryItem__save-btn">Save</button>
+            <button
+              onClick={saveEditInventoryItem}
+              className="editInventoryItem__save-btn"
+            >
+              Save
+            </button>
           </div>
         </div>
       </div>
