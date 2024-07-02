@@ -70,6 +70,9 @@
     border-left-color: lightgrey;
     border-bottom-color: lightgrey;
   }
+  &__input:focus {
+    outline: none;
+  }
   &__search-btn {
     display: flex;
     width: 30px;

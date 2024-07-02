@@ -56,6 +56,9 @@
     border-left-color: lightgrey;
     border-bottom-color: lightgrey;
   }
+  &__input:focus {
+    outline: none;
+  }
   &__search-button {
     display: flex;
     width: 30px;
