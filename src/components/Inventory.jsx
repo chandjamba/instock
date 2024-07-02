@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 
 export default function Inventory() {
   const [inventories, setInventories] = useState();
+  const [searchValue, setSearchValue] = useState("");
   const url = "https://instock-api-cj.onrender.com/api/inventories";
 
   useEffect(() => {
@@ -16,16 +17,40 @@ export default function Inventory() {
     fetchedInventoriesData();
   }, []);
 
+  async function handleSearchButton() {
+    const searchParam = new URLSearchParams({ s: searchValue }).toString();
+    console.log(searchValue);
+    console.log(searchParam);
+    const url = `https://instock-api-cj.onrender.com/api/inventories?${searchParam}`;
+    const resp = await fetch(url);
+    const data = await resp.json();
+    console.log(data);
+    setInventories(data);
+  }
+
   return (
     <div className="inventories">
       <div className="inventory">
         <div className="inventory__main-heading-and-input-section">
           <h1 className="inventory__main-heading">Inventory</h1>
-          <input
-            className="inventory__input"
-            type="text"
-            placeholder="Search..."
-          ></input>
+          <div className="inventory__input-section">
+            <input
+              className="inventory__input"
+              type="text"
+              placeholder="Search..."
+              value={searchValue}
+              onChange={(event) => {
+                console.log(event.target.value);
+                setSearchValue(event.target.value);
+              }}
+            />
+            <button
+              onClick={handleSearchButton}
+              className="inventory__search-btn"
+            >
+              🔎
+            </button>
+          </div>
           <Link
             to={"/inventory/addInventoryItem"}
             className="inventory__add-btn"

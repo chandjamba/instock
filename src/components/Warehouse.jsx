@@ -6,6 +6,7 @@ const url = "https://instock-api-cj.onrender.com/api/warehouses";
 
 export default function Warehouse() {
   const [warehouses, setWarehouses] = useState();
+  const [searchValue, setSearchValue] = useState("");
 
   useEffect(() => {
     async function fetchedWarehousesData() {
@@ -17,15 +18,38 @@ export default function Warehouse() {
     fetchedWarehousesData();
   }, []);
 
+  async function handleSearchButton() {
+    const searchParam = new URLSearchParams({ s: searchValue }).toString();
+    console.log(searchParam);
+    const url = `https://instock-api-cj.onrender.com/api/warehouses?${searchParam}`;
+    const resp = await fetch(url);
+    const data = await resp.json();
+    console.log(data);
+    setWarehouses(data);
+  }
+
   return (
     <div className="warehouses">
       <div className="warehouse">
         <h1 className="warehouse__main-heading">Warehouses</h1>
-        <input
-          className="warehouse__input"
-          type="text"
-          placeholder="Search..."
-        />
+        <div className="warehouse__input-section">
+          <input
+            className="warehouse__input"
+            type="text"
+            placeholder="Search..."
+            value={searchValue}
+            onChange={(event) => {
+              setSearchValue(event.target.value);
+              console.log(event.target.value);
+            }}
+          />
+          <button
+            onClick={handleSearchButton}
+            className="warehouse__search-button"
+          >
+            🔎
+          </button>
+        </div>
         <Link to={"/warehouse/addWarehouse"} className="warehouse__add-btn">
           {" "}
           + Add New Warehouse

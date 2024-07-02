@@ -42,18 +42,51 @@
     font-family: Arial, Helvetica, sans-serif;
     background-color: #f6f6f6;
   }
-
-  &__input {
+  &__input-section {
     display: flex;
     border: solid;
     border-width: 1px;
     border-radius: 20px;
     border-color: #f6f6f6;
+    background-color: #f6f6f6;
+    padding: 10px;
+    width: 300px;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__input {
+    display: flex;
+    border: solid;
+    border-width: 1px;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-color: #f6f6f6;
     padding: 10px;
     width: 295px;
   }
   &__input:hover {
-    border-color: lightgrey;
+    border-top-color: lightgrey;
+    border-left-color: lightgrey;
+    border-bottom-color: lightgrey;
+  }
+  &__search-btn {
+    display: flex;
+    width: 30px;
+    height: 38px;
+    border: solid;
+    border-width: 1px;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border-color: #f6f6f6;
+    background-color: white;
+    align-items: center;
+    justify-content: center;
+  }
+  &__search-btn:hover {
+    border-top-color: lightgrey;
+    border-right-color: lightgrey;
+    border-bottom-color: lightgrey;
   }
 
   &__add-btn {
