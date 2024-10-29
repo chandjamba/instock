@@ -1,16 +1,20 @@
 import { useEffect, useState } from "react";
 import "./inventory.scss";
 import { Link } from "react-router-dom";
+import { databases } from "../lib/appwrite";
 
 export default function Inventory() {
   const [inventories, setInventories] = useState();
   const [searchValue, setSearchValue] = useState("");
-  const url = "https://instock-api-cj.onrender.com/api/inventories";
 
   useEffect(() => {
     async function fetchedInventoriesData() {
-      const resp = await fetch(url);
-      const data = await resp.json();
+      const resp = await databases.listDocuments(
+        import.meta.env.VITE_INSTOCK_DATABASE_ID,
+        import.meta.env.VITE_INSTOCK_INVENTORIES_COLLECTION_ID,
+        []
+      );
+      const data = resp.documents;
       console.log(data);
       setInventories(data);
     }
@@ -67,43 +71,45 @@ export default function Inventory() {
                   <div className="inventory__info-box1">
                     <p className="inventory__heading">INVENTORY</p>
                     <Link
-                      to={`/inventory/${inventory?.id}`}
+                      to={`/inventory/${inventory?.$id}`}
                       className="inventory__item-name"
                     >
-                      {inventory?.item_name}
+                      {inventory?.itemName}
                     </Link>
                     <p className="inventory__category-heading">CATEGORY</p>
                     <div className="inventory__category">
-                      {inventory?.category}
+                      {inventory?.categories?.categoryName}
                     </div>
                     <p className="inventory__itemnumber-heading">ITEM NUMBER</p>
-                    <div className="inventory__item-no">{inventory?.id}</div>
+                    <div className="inventory__item-no">{inventory?.$id}</div>
                   </div>
                   <div className="inventory__info-box2">
                     <p className="inventory__status-heading">STATUS</p>
-                    <div className="inventory__status">{inventory?.status}</div>
+                    <div className="inventory__status">
+                      {inventory?.itemStatus}
+                    </div>
                     <p className="inventory__quantity-heading">QTY</p>
                     <div className="inventory__quantity">
-                      {inventory?.quantity}
+                      {inventory?.itemQuantity}
                     </div>
                     <p className="inventory__heading">WAREHOUSE</p>
                     <Link
-                      to={`/warehouse/${inventory?.warehouse_name}`}
+                      to={`/warehouse/${inventory?.warehouses?.warehouseName}`}
                       className="inventory__location"
                     >
-                      {inventory?.warehouse_name}
+                      {inventory?.warehouses?.warehouseCity}
                     </Link>
                   </div>
                 </div>
                 <div className="inventory__card-btn">
                   <Link
-                    to={`/inventory/${inventory?.id}/delete`}
+                    to={`/inventory/${inventory?.$id}/delete`}
                     className="inventory-delete"
                   >
                     Delete
                   </Link>
                   <Link
-                    to={`/inventory/${inventory?.id}/edit`}
+                    to={`/inventory/${inventory?.$id}/edit`}
                     className="inventory-edit"
                   >
                     Edit

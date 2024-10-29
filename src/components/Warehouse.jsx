@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import "./warehouse.scss";
 import { Link } from "react-router-dom";
-
-const url = "https://instock-api-cj.onrender.com/api/warehouses";
+import { databases } from "../lib/appwrite";
 
 export default function Warehouse() {
   const [warehouses, setWarehouses] = useState();
@@ -10,8 +9,12 @@ export default function Warehouse() {
 
   useEffect(() => {
     async function fetchedWarehousesData() {
-      const resp = await fetch(url);
-      const data = await resp.json();
+      const resp = await databases.listDocuments(
+        import.meta.env.VITE_INSTOCK_DATABASE_ID,
+        import.meta.env.VITE_INSTOCK_WAREHOUSES_COLLECTION_ID,
+       
+      );
+      const data = resp.documents;
       console.log(data);
       setWarehouses(data);
     }
@@ -57,7 +60,7 @@ export default function Warehouse() {
         <div className="warehouses__list">
           {warehouses?.map((warehouse) => {
             return (
-              <div className="warehouse-card1" key={warehouse?.id}>
+              <div className="warehouse-card1" key={warehouse?.$id}>
                 <div className="warehouse__info">
                   <div className="warehouse__info-box1">
                     <p className="warehouse__heading">WAREHOUSE</p>
@@ -65,18 +68,18 @@ export default function Warehouse() {
                       to={`/warehouse/${warehouse?.id}`}
                       className="warehouse__location"
                     >
-                      {warehouse?.warehouse_name}
+                      {warehouse?.warehouseName}
                     </Link>
                     <p className="warehouse__address-heading">ADDRESS</p>
                     <div className="warehouse__address">
-                      {warehouse?.address}, {warehouse?.city},{" "}
-                      {warehouse?.country}
+                      {warehouse?.warehouseAddress}, {warehouse?.warehouseCity},{" "}
+                      {warehouse?.warehouseCountry}
                     </div>
                   </div>
                   <div className="warehouse__info-box2">
                     <p className="warehouse__name-heading">CONTACT NAME</p>
                     <div className="warehouse__contact-name">
-                      {warehouse?.contact_name}
+                      {warehouse?.warehouseContactName}
                     </div>
                     <p className="warehouse__contact-heading">CONTACT</p>
                     <div className="warehouse__contact">
@@ -84,20 +87,20 @@ export default function Warehouse() {
                         {warehouse?.contact_phone}
                       </p>
                       <p className="warehouse__contact-email">
-                        {warehouse?.contact_email}
+                        {warehouse?.warehouseEmail}
                       </p>
                     </div>
                   </div>
                 </div>
                 <div className="warehouse__card-btn">
                   <Link
-                    to={`/warehouse/${warehouse?.id}/delete`}
+                    to={`/warehouse/${warehouse?.$id}/delete`}
                     className="warehouse-delete"
                   >
                     Delete
                   </Link>
                   <Link
-                    to={`warehouse/${warehouse?.id}/edit`}
+                    to={`warehouse/${warehouse?.$id}/edit`}
                     className="warehouse-edit"
                   >
                     Edit

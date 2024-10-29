@@ -23,7 +23,6 @@ import InventoryItemDelete from "./components/InventoryItemDelete";
 // let d = c.split("/");
 // console.log("array of route browser have defined", d);
 // console.log(d[2]);
-
 export default function App() {
   return (
     <BrowserRouter>
@@ -43,7 +42,10 @@ export default function App() {
           />
 
           <Route path="/inventory/" caseSensitive element={<Inventory />} />
-          <Route path="/inventory/addInventoryItem" element={<AddInventoryItem />} />
+          <Route
+            path="/inventory/addInventoryItem"
+            element={<AddInventoryItem />}
+          />
           <Route
             path="/inventory/:itemId"
             caseSensitive

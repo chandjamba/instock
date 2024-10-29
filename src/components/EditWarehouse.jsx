@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import "./editWarehouse.scss";
 import axios from "axios";
+import { databases, ID } from "../lib/appwrite";
 
 export default function EditWarehouse() {
   const [editWarehouse, setEditWarehouse] = useState();
@@ -9,20 +10,24 @@ export default function EditWarehouse() {
 
   useEffect(() => {
     async function fetchedEditWarehouse() {
-      const url = `https://instock-api-cj.onrender.com/api/warehouses/${warehouseId}`;
-      const resp = await fetch(url);
-      const data = await resp.json();
+      const resp = await databases.updateDocument(
+        import.meta.env.VITE_INSTOCK_DATABASE_ID,
+        import.meta.env.VITE_INSTOCK_WAREHOUSES_COLLECTION_ID,
+        ID.unique()
+      );
+      const data = resp.documents;
+      console.lof(data);
       setEditWarehouse(data);
     }
     fetchedEditWarehouse();
-  }, [warehouseId]);
+  }, []);
   console.log(editWarehouse);
 
-async function editedWarehouse() {
-  const url = `https://instock-api-cj.onrender.com/api/warehouses/${warehouseId}`;
-  const resp = await axios.put(url, editWarehouse);
-  console.log(resp, "parsedData")
-}
+  async function editedWarehouse() {
+    const url = `https://instock-api-cj.onrender.com/api/warehouses/${warehouseId}`;
+    const resp = await axios.put(url, editWarehouse);
+    console.log(resp, "parsedData");
+  }
 
   return (
     <div className="editWarehouses">
@@ -219,9 +224,12 @@ async function editedWarehouse() {
           </div>
 
           <div className="ediWarehouse__save-btn-container">
-            <button 
-            onClick={editedWarehouse}
-            className="editWarehouse__save-btn">Save</button>
+            <button
+              onClick={editedWarehouse}
+              className="editWarehouse__save-btn"
+            >
+              Save
+            </button>
           </div>
         </div>
       </div>
