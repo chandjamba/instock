@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import "./editWarehouse.scss";
-import axios from "axios";
-import { databases, ID } from "../lib/appwrite";
+import { databases } from "../lib/appwrite";
 
 export default function EditWarehouse() {
   const [editWarehouse, setEditWarehouse] = useState();
@@ -10,23 +9,27 @@ export default function EditWarehouse() {
 
   useEffect(() => {
     async function fetchedEditWarehouse() {
-      const resp = await databases.updateDocument(
+      const resp = await databases.getDocument(
         import.meta.env.VITE_INSTOCK_DATABASE_ID,
         import.meta.env.VITE_INSTOCK_WAREHOUSES_COLLECTION_ID,
-        ID.unique()
+        warehouseId
       );
-      const data = resp.documents;
-      console.lof(data);
+      const data = resp;
+      console.log(data);
       setEditWarehouse(data);
     }
     fetchedEditWarehouse();
-  }, []);
-  console.log(editWarehouse);
+  }, [warehouseId]);
 
-  async function editedWarehouse() {
-    const url = `https://instock-api-cj.onrender.com/api/warehouses/${warehouseId}`;
-    const resp = await axios.put(url, editWarehouse);
-    console.log(resp, "parsedData");
+   async function saveEditWarehouse() {
+    const resp = await databases.updateDocument(
+      import.meta.env.VITE_INSTOCK_DATABASE_ID,
+      import.meta.env.VITE_INSTOCK_WAREHOUSES_COLLECTION_ID,
+      warehouseId
+      );
+      const data = resp;
+      console.log(data, "parsedData");
+      setEditWarehouse(data);
   }
 
   return (
@@ -49,9 +52,9 @@ export default function EditWarehouse() {
                 className="editWarehouse__name-input"
                 type="text"
                 placeholder="Warehouse name..."
-                value={editWarehouse?.warehouse_name}
+                value={editWarehouse?.warehouseName}
                 onChange={(event) => {
-                  // console.log(event.target.value);
+                  console.log(event.target.value);
                   // setEditWarehouse({
                   //   ...editWarehouse,
                   //   warehouse_name: event.target.value,
@@ -59,7 +62,7 @@ export default function EditWarehouse() {
                   setEditWarehouse((pureState) => {
                     return {
                       ...pureState,
-                      warehouse_name: event.target.value,
+                      warehouseName: event.target.value,
                     };
                   });
                 }}
@@ -72,14 +75,14 @@ export default function EditWarehouse() {
                 className="editWarehouse__street-address-input"
                 type="text"
                 placeholder="Address"
-                value={editWarehouse?.address}
+                value={editWarehouse?.warehouseAddress}
                 onChange={(event) => {
                   console.log(event.target.value);
 
                   setEditWarehouse((pureState) => {
                     return {
                       ...pureState,
-                      address: event.target.value,
+                      warehouseAddress: event.target.value,
                     };
                   });
                 }}
@@ -92,7 +95,7 @@ export default function EditWarehouse() {
                 className="editWarehouse__city-input"
                 type="text"
                 placeholder="City"
-                value={editWarehouse?.city}
+                value={editWarehouse?.warehouseCity}
                 onChange={(event) => {
                   console.log(event.target.value);
                   // setEditWarehouse({
@@ -102,7 +105,7 @@ export default function EditWarehouse() {
                   setEditWarehouse((pureState) => {
                     return {
                       ...pureState,
-                      city: event.target.value,
+                      warehouseCity: event.target.value,
                     };
                   });
                 }}
@@ -115,13 +118,13 @@ export default function EditWarehouse() {
                 className="editWarehouse__country-input"
                 type="text"
                 placeholder="Country"
-                value={editWarehouse?.country}
+                value={editWarehouse?.warehouseCountry}
                 onChange={(event) => {
                   console.log(event.target.value);
                   setEditWarehouse((pureState) => {
                     return {
                       ...pureState,
-                      country: event.target.value,
+                      warehouseCountry: event.target.value,
                     };
                   });
                 }}
@@ -144,13 +147,13 @@ export default function EditWarehouse() {
                 className="editWarehouse__contact-name-input"
                 type="text"
                 placeholder="Name"
-                value={editWarehouse?.contact_name}
+                value={editWarehouse?.warehouseContactName}
                 onChange={(event) => {
                   console.log(event.target.value);
                   setEditWarehouse((pureState) => {
                     return {
                       ...pureState,
-                      contact_name: event.target.value,
+                      warehouseContactName: event.target.value,
                     };
                   });
                 }}
@@ -163,13 +166,13 @@ export default function EditWarehouse() {
                 className="editWarehouse__contact-position-input"
                 type="text"
                 placeholder="position"
-                value={editWarehouse?.contact_position}
+                value={editWarehouse?.warehouseContactPosition}
                 onChange={(event) => {
                   console.log(event.target.value);
                   setEditWarehouse((pureState) => {
                     return {
                       ...pureState,
-                      contact_position: event.target.value,
+                      warehouseContactPosition: event.target.value,
                     };
                   });
                 }}
@@ -182,13 +185,13 @@ export default function EditWarehouse() {
                 className="editWarehouse__contact-number-input"
                 type="text"
                 placeholder="Phone number"
-                value={editWarehouse?.contact_phone}
+                value={editWarehouse?.warehousePhoneNumber}
                 onChange={(event) => {
                   console.log(event.target.value);
                   setEditWarehouse((pureState) => {
                     return {
                       ...pureState,
-                      contact_number: event.target.value,
+                      warehousePhoneumber: event.target.value,
                     };
                   });
                 }}
@@ -201,13 +204,13 @@ export default function EditWarehouse() {
                 className="editWarehouse__contact-email-input"
                 type="text"
                 placeholder="Email"
-                value={editWarehouse?.contact_email}
+                value={editWarehouse?.warehouseEmail}
                 onChange={(event) => {
                   console.log(event.target.value);
                   setEditWarehouse((pureState) => {
                     return {
                       ...pureState,
-                      contact_email: event.target.value,
+                      warehouseEmail: event.target.value,
                     };
                   });
                 }}
@@ -225,7 +228,7 @@ export default function EditWarehouse() {
 
           <div className="ediWarehouse__save-btn-container">
             <button
-              onClick={editedWarehouse}
+              onClick={saveEditWarehouse}
               className="editWarehouse__save-btn"
             >
               Save

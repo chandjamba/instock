@@ -1,14 +1,23 @@
 import { useState } from "react";
 import "./addWarehouse.scss/";
 import { Link } from "react-router-dom";
-import axios from "axios";
+import { ID, databases } from "../lib/appwrite";
 
 export default function AddWarehouse() {
   const [addWarehouse, setAddWarehouse] = useState();
   async function createWarehouse() {
-    const url = "https://instock-api-cj.onrender.com/api/warehouses";
-    const response = await axios.post(url, addWarehouse);
-    console.log(response, "parsedData");
+    const resp = await databases.createDocument(
+      import.meta.env.VITE_INSTOCK_DATABASE_ID,
+      import.meta.env.VITE_INSTOCK_WAREHOUSES_COLLECTION_ID,
+      ID.unique()
+      {
+        warehouseId: ID.unique(),
+        warehouseName: event.target.warehouseName.value,
+      }
+    );
+  
+    const data =resp;
+    console.log(data, "parsedData");
   }
   return (
     <div className="addWarehouses">
@@ -28,11 +37,12 @@ export default function AddWarehouse() {
               <div className="addWarehouse__name">Warehouse Name</div>
               <input
                 className="addWarehouse__name-input"
+                name="warehouseName"
                 type="text"
                 placeholder="Warehouse name"
-                value={addWarehouse?.warehouse_name}
+                value={addWarehouse?.warehouseName}
                 onChange={(event) => {
-                  // console.log(event.target.value);
+                  console.log(event.target.value);
                   // setAddWarehouse({
                   //   ...addWarehouse,
                   //   warehouse_name: event.target.value,
@@ -40,7 +50,7 @@ export default function AddWarehouse() {
                   setAddWarehouse((pureState) => {
                     return {
                       ...pureState,
-                      warehouse_name: event.target.value,
+                      warehouseName: event.target.value,
                     };
                   });
                 }}
@@ -53,14 +63,14 @@ export default function AddWarehouse() {
                 className="addWarehouse__street-address-input"
                 type="text"
                 placeholder="Address"
-                value={addWarehouse?.address}
+                value={addWarehouse?.warehouseAddress}
                 onChange={(event) => {
                   console.log(event.target.value);
 
                   setAddWarehouse((pureState) => {
                     return {
                       ...pureState,
-                      address: event.target.value,
+                      warehouseAddress: event.target.value,
                     };
                   });
                 }}
@@ -73,7 +83,7 @@ export default function AddWarehouse() {
                 className="addWarehouse__city-input"
                 type="text"
                 placeholder="City"
-                value={addWarehouse?.city}
+                value={addWarehouse?.warehouseCity}
                 onChange={(event) => {
                   console.log(event.target.value);
                   // setAddWarehouse({
@@ -83,7 +93,7 @@ export default function AddWarehouse() {
                   setAddWarehouse((pureState) => {
                     return {
                       ...pureState,
-                      city: event.target.value,
+                      warehouseCity: event.target.value,
                     };
                   });
                 }}
@@ -96,13 +106,13 @@ export default function AddWarehouse() {
                 className="addWarehouse__country-input"
                 type="text"
                 placeholder="Country"
-                value={addWarehouse?.country}
+                value={addWarehouse?.warehouseCountry}
                 onChange={(event) => {
                   console.log(event.target.value);
                   setAddWarehouse((pureState) => {
                     return {
                       ...pureState,
-                      country: event.target.value,
+                      warehouseCountry: event.target.value,
                     };
                   });
                 }}
@@ -125,13 +135,13 @@ export default function AddWarehouse() {
                 className="addWarehouse__contact-name-input"
                 type="text"
                 placeholder="Name"
-                value={addWarehouse?.contact_name}
+                value={addWarehouse?.warehouseContactName}
                 onChange={(event) => {
                   console.log(event.target.value);
                   setAddWarehouse((pureState) => {
                     return {
                       ...pureState,
-                      contact_name: event.target.value,
+                      warehouseContactName: event.target.value,
                     };
                   });
                 }}
@@ -144,13 +154,13 @@ export default function AddWarehouse() {
                 className="addWarehouse__contact-position-input"
                 type="text"
                 placeholder="Position"
-                value={addWarehouse?.contact_position}
+                value={addWarehouse?.warehouseContactPosition}
                 onChange={(event) => {
                   console.log(event.target.value);
                   setAddWarehouse((pureState) => {
                     return {
                       ...pureState,
-                      contact_position: event.target.value,
+                      warehouseContactPosition: event.target.value,
                     };
                   });
                 }}
@@ -163,13 +173,13 @@ export default function AddWarehouse() {
                 className="addWarehouse__contact-number-input"
                 type="text"
                 placeholder="Phone number"
-                value={addWarehouse?.contact_phone}
+                value={addWarehouse?.warehousePhoneNumber}
                 onChange={(event) => {
                   console.log(event.target.value);
                   setAddWarehouse((pureState) => {
                     return {
                       ...pureState,
-                      contact_phone: event.target.value,
+                      warehousePhoneNumber: event.target.value,
                     };
                   });
                 }}
@@ -182,13 +192,13 @@ export default function AddWarehouse() {
                 className="addWarehouse__contact-email-input"
                 type="text"
                 placeholder="Email"
-                value={addWarehouse?.contact_email}
+                value={addWarehouse?.warehouseEmail}
                 onChange={(event) => {
                   console.log(event.target.value);
                   setAddWarehouse((pureState) => {
                     return {
                       ...pureState,
-                      contact_email: event.target.value,
+                      warehouseEmail: event.target.value,
                     };
                   });
                 }}
