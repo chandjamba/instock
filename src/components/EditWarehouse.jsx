@@ -25,12 +25,13 @@ export default function EditWarehouse() {
     const resp = await databases.updateDocument(
       import.meta.env.VITE_INSTOCK_DATABASE_ID,
       import.meta.env.VITE_INSTOCK_WAREHOUSES_COLLECTION_ID,
-      warehouseId
+      warehouseId, 
+      {respData}
       );
-      const data = resp;
-      console.log(data, "parsedData");
-      setEditWarehouse(data);
+      console.log(resp, "editedData");
+      setEditWarehouse({...resp, respData});
   }
+
 
   return (
     <div className="editWarehouses">

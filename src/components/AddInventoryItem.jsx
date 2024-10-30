@@ -10,7 +10,7 @@ async function fetchCategoriesData() {
     import.meta.env.VITE_INSTOCK_CATEGORIES_COLLECTION_ID
   );
   const data = resp.documents;
-  console.log(data, "categories");
+  console.log(data, "categoriesData");
   return data;
 }
 async function fetchWarehousesData() {
@@ -19,26 +19,41 @@ async function fetchWarehousesData() {
     import.meta.env.VITE_INSTOCK_WAREHOUSES_COLLECTION_ID
   );
   const data = resp.documents;
-  console.log(data);
+  console.log(data, "warehouseData");
   return data;
 }
+
+async function fetchInventoriesData() {
+  const resp = await databases.listDocuments(
+    import.meta.env.VITE_INSTOCK_DATABASE_ID,
+    import.meta.env.VITE_INSTOCK_INVENTORIES_COLLECTION_ID
+  );
+  const data = resp.documents;
+  console.log(data, "InventoriesData");
+  return data;
+}
+
 export default function AddInventoryItem() {
-  // const [addInventoryItem, setAddInventoryItem] = useState();
+  const [inventories, setInventories] = useState([]);
   const [warehousesList, setWarehousesList] = useState([]);
   const [categories, setCategories] = useState([]);
   // const navigate = useNavigate();
 
   useEffect(() => {
-    async function fetchWarehouseAndInventoriesData() {
-      const [fetchedCategoriesData, fetchedWarehousesData] = await Promise.all([
+    async function fetchWarehouseAndCategoriesAndInventoriesData() {
+      const [fetchedInventoriesData, fetchedWarehousesData, fetchedCategoriesData] = await Promise.all([
         fetchCategoriesData(),
         fetchWarehousesData(),
+        fetchInventoriesData(),
       ]);
-      setCategories(fetchedCategoriesData);
-      console.log(fetchedCategoriesData, "categoriesData");
+      setInventories(fetchedInventoriesData);
+      console.log(fetchedInventoriesData, "inventoriesData");
       setWarehousesList(fetchedWarehousesData);
+      console.log(fetchedWarehousesData, "warehouseData");
+      setCategories(fetchedCategoriesData);
+      console.log(fetchedCategoriesData, "categoriesData")
     }
-    fetchWarehouseAndInventoriesData();
+    fetchWarehouseAndCategoriesAndInventoriesData();
   }, []);
 
   const submitButtonHandler = async (event) => {
@@ -110,10 +125,10 @@ export default function AddInventoryItem() {
                   name="category"
                   placeholder="Select"
                 >
-                  {categories.map((category) => {
+                  {inventories.map((inventory) => {
                     return (
-                      <option key={category?.$id} value={category?.$id}>
-                        {category?.categoryName}
+                      <option key={inventory?.$id} value={inventory?.$id}>
+                        {inventory?.categoryName}
                       </option>
                     );
                   })}
@@ -135,12 +150,12 @@ export default function AddInventoryItem() {
 
                 <div className="addInventoryItem__status-inputs">
                   <label>
-                    <input type="radio" name="itemStatus" />
+                    <input type="radio" name="itemStatus"  />
                     <p>In Stock</p>
                   </label>
 
                   <label>
-                    <input type="radio" name="itemStatus" />
+                    <input type="radio" name="itemStatus"  />
                     <p>Out of Stock</p>
                   </label>
                 </div>
