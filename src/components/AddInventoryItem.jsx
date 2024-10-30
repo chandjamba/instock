@@ -1,233 +1,196 @@
 import { useEffect, useState } from "react";
 import "./addInventoryItem.scss";
-import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
+// import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { databases, ID } from "../lib/appwrite";
 
+async function fetchCategoriesData() {
+  const resp = await databases.listDocuments(
+    import.meta.env.VITE_INSTOCK_DATABASE_ID,
+    import.meta.env.VITE_INSTOCK_CATEGORIES_COLLECTION_ID
+  );
+  const data = resp.documents;
+  console.log(data, "categories");
+  return data;
+}
+async function fetchWarehousesData() {
+  const resp = await databases.listDocuments(
+    import.meta.env.VITE_INSTOCK_DATABASE_ID,
+    import.meta.env.VITE_INSTOCK_WAREHOUSES_COLLECTION_ID
+  );
+  const data = resp.documents;
+  console.log(data);
+  return data;
+}
 export default function AddInventoryItem() {
-  const [addInventoryItem, setAddInventoryItem] = useState();
+  // const [addInventoryItem, setAddInventoryItem] = useState();
   const [warehousesList, setWarehousesList] = useState([]);
-  const navigate = useNavigate();
-  useEffect(() => {
-    async function fetchedWarehouseId() {
-      const url = "https://instock-api-cj.onrender.com/api/warehouses";
-      const resp = await fetch(url);
-      const data = await resp.json();
-      console.log(data);
-      setWarehousesList(data);
-    }
+  const [categories, setCategories] = useState([]);
+  // const navigate = useNavigate();
 
-    fetchedWarehouseId();
+  useEffect(() => {
+    async function fetchWarehouseAndInventoriesData() {
+      const [fetchedCategoriesData, fetchedWarehousesData] = await Promise.all([
+        fetchCategoriesData(),
+        fetchWarehousesData(),
+      ]);
+      setCategories(fetchedCategoriesData);
+      console.log(fetchedCategoriesData, "categoriesData");
+      setWarehousesList(fetchedWarehousesData);
+    }
+    fetchWarehouseAndInventoriesData();
   }, []);
 
-  async function createInventoryItem() {
-    const url = "https://instock-api-cj.onrender.com/api/inventories";
-    const resp = await axios.post(url, addInventoryItem);
-    navigate(`/inventory/${resp.data.id}`);
-    console.log(resp, "parsedData");
-  }
+  const submitButtonHandler = async (event) => {
+    event.preventDefault();
+    try {
+      await databases.createDocument(
+        import.meta.env.VITE_INSTOCK_DATABASE_ID,
+        import.meta.env.VITE_INSTOCK_INVENTORIES_COLLECTION_ID,
+        ID.unique(),
+        {
+          itemName: event.target.name.value,
+          itemDescription: event.target.description.value,
+          itemStatus: event.target.itemStatus.value,
+          itemQuantity: event.target.quantity.value,
+          itemCategory: event.target.category.value,
+        }
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
-    <div className="addInventoryItems">
-      <div className="addInventoryItem">
-        <div className="addInventoryItem__heading-card">
-          <h1 className="addInventoryItem__main-heading">
-            {" "}
-            Add New Inventory Item
-          </h1>
-        </div>
-        <div className="addInventoryItem__details">
-          <div className="addInventoryItem__details-heading">
-            <h1 className="addInventoryItem__details-heading-text">
+    <form
+      className="addInventoryItems__main-form"
+      onSubmit={submitButtonHandler}
+    >
+      <div className="addInventoryItems">
+        <div className="addInventoryItem">
+          <div className="addInventoryItem__heading-card">
+            <h1 className="addInventoryItem__main-heading">
               {" "}
-              Item Details
+              Add New Inventory Item
             </h1>
           </div>
-          <div className="addInventoryItem__details-input-section">
-            <div className="addInventoryItem__name-input-section">
-              <div className="addInventoryItem__name">Item Name</div>
-              <input
-                className="addInventoryItem__name-input"
-                type="text"
-                placeholder="Item name..."
-                value={addInventoryItem?.item_name}
-                onChange={(event) => {
-                  // console.log(event.target.value);
-                  // setAddInventoryItemItem({
-                  //   ...addInventoryItem,
-                  //   warehouse_name: event.target.value,
-                  // });
-                  setAddInventoryItem((pureState) => {
-                    return {
-                      ...pureState,
-                      item_name: event.target.value,
-                    };
-                  });
-                }}
-              />
+          <div className="addInventoryItem__details">
+            <div className="addInventoryItem__details-heading">
+              <h1 className="addInventoryItem__details-heading-text">
+                {" "}
+                Item Details
+              </h1>
             </div>
+            <div className="addInventoryItem__details-input-section">
+              <div className="addInventoryItem__name-input-section">
+                <div className="addInventoryItem__name">Item Name</div>
+                <input
+                  className="addInventoryItem__name-input"
+                  name="name"
+                  type="text"
+                  placeholder="Item name..."
+                />
+              </div>
 
-            <div className="addInventoryItem__description-input-section">
-              <p className="addInventoryItem__description">Description</p>
-              <textarea
-                className="addInventoryItem__description-input"
-                type="text"
-                placeholder="Description..."
-                rows={5}
-                value={addInventoryItem?.description}
-                onChange={(event) => {
-                  console.log(event.target.value);
+              <div className="addInventoryItem__description-input-section">
+                <p className="addInventoryItem__description">Description</p>
+                <textarea
+                  className="addInventoryItem__description-input"
+                  name="description"
+                  type="text"
+                  placeholder="Description..."
+                  rows={5}
+                ></textarea>
+              </div>
 
-                  setAddInventoryItem((pureState) => {
-                    return {
-                      ...pureState,
-                      description: event.target.value,
-                    };
-                  });
-                }}
-              ></textarea>
-            </div>
-
-            <div className="addInventoryItem__category-input-section">
-              <p className="addInventoryItem__category">Category</p>
-              <select
-                className="addInventoryItem__category-input"
-                value={addInventoryItem?.category}
-                placeholder="Select"
-                onChange={(event) => {
-                  console.log(event.target.value);
-                  setAddInventoryItem((pureState) => {
-                    return {
-                      ...pureState,
-                      category: event.target.value,
-                    };
-                  });
-                }}
-              >
-                <option>Electronics</option>
-                <option>Apparel</option>
-                <option>Gear</option>
-                <option>Accessories</option>
-                <option>Health</option>
-              </select>
-            </div>
-          </div>
-        </div>
-
-        <div className="addInventoryItem__availability-details">
-          <div className="addInventoryItem__availability-details-heading">
-            <h1 className="addInventoryItem__availability-details-heading-text">
-              {" "}
-              Item Availability
-            </h1>
-          </div>
-          <div className="addInventoryItem__availability-input-section">
-            <div className="addInventoryItem__status-input-section">
-              <div className="addInventoryItem__status">Status</div>
-
-              <div className="addInventoryItem__status-inputs">
-                <label htmlFor="In Stock">
-                  <input
-                    id="In Stock"
-                    type="radio"
-                    name="status"
-                    value={addInventoryItem?.status}
-                    onChange={() =>
-                      setAddInventoryItem((pureState) => {
-                        return {
-                          ...pureState,
-                          status: "In Stock",
-                        };
-                      })
-                    }
-                  />
-                  <p>In Stock</p>
-                </label>
-
-                <label htmlFor="Out of Stock">
-                  <input
-                    id="Out of Stock"
-                    type="radio"
-                    name="status"
-                    value={addInventoryItem?.inventoryStatus}
-                    onChange={() =>
-                      setAddInventoryItem((pureState) => {
-                        return {
-                          ...pureState,
-                          status: "Out of Stock",
-                        };
-                      })
-                    }
-                  />
-                  <p>Out of Stock</p>
-                </label>
+              <div className="addInventoryItem__category-input-section">
+                <p className="addInventoryItem__category">Category</p>
+                <select
+                  className="addInventoryItem__category-input"
+                  name="category"
+                  placeholder="Select"
+                >
+                  {categories.map((category) => {
+                    return (
+                      <option key={category?.$id} value={category?.$id}>
+                        {category?.categoryName}
+                      </option>
+                    );
+                  })}
+                </select>
               </div>
             </div>
-
-            <div className="addInventoryItem__quantity-input-section">
-              <div className="addInventoryItem__quantity">Quantity</div>
-
-              <input
-                className="addInventoryItem__quantity-input"
-                type="text"
-                placeholder="Quantity..."
-                value={addInventoryItem?.quantity}
-                onChange={(event) => {
-                  console.log(event.target.value);
-                  setAddInventoryItem((pureState) => {
-                    return {
-                      ...pureState,
-                      quantity: parseInt(event.target.value),
-                    };
-                  });
-                }}
-              />
-            </div>
-
-            <div className="addInventoryItem__warehouse-input-section">
-              <p className="addInventoryItem__warehouse">Warehouse</p>
-              <select
-                className="addInventoryItem__warehouse-select-input"
-                placeholder="Select"
-                value={addInventoryItem?.warehouse_id}
-                onChange={(event) => {
-                  console.log(event.target.value);
-                  setAddInventoryItem((pureState) => {
-                    return {
-                      ...pureState,
-                      warehouse_id: event.target.value,
-                    };
-                  });
-                }}
-              >
-                {warehousesList.map((warehouse) => {
-                  return (
-                    <option value={warehouse?.id} key={warehouse?.id}>
-                      {warehouse?.warehouse_name}
-                    </option>
-                  );
-                })}
-              </select>
-            </div>
-          </div>
-        </div>
-
-        <div className="addInventoryItem__buttons-container">
-          <div className="addInventoryItem__cancel-btn-container">
-            <Link to={"/inventory/"} className="addInventoryItem__cancel-btn">
-              Cancel
-            </Link>
           </div>
 
-          <div className="addInventoryItem__save-btn-container">
-            <button
-              onClick={createInventoryItem}
-              className="addInventoryItem__save-btn"
-            >
-              Save
-            </button>
+          <div className="addInventoryItem__availability-details">
+            <div className="addInventoryItem__availability-details-heading">
+              <h1 className="addInventoryItem__availability-details-heading-text">
+                {" "}
+                Item Availability
+              </h1>
+            </div>
+            <div className="addInventoryItem__availability-input-section">
+              <div className="addInventoryItem__status-input-section">
+                <div className="addInventoryItem__status">Status</div>
+
+                <div className="addInventoryItem__status-inputs">
+                  <label>
+                    <input type="radio" name="itemStatus" />
+                    <p>In Stock</p>
+                  </label>
+
+                  <label>
+                    <input type="radio" name="itemStatus" />
+                    <p>Out of Stock</p>
+                  </label>
+                </div>
+              </div>
+
+              <div className="addInventoryItem__quantity-input-section">
+                <div className="addInventoryItem__quantity">Quantity</div>
+
+                <input
+                  className="addInventoryItem__quantity-input"
+                  name="quantity"
+                  type="text"
+                  placeholder="Quantity..."
+                />
+              </div>
+
+              <div className="addInventoryItem__warehouse-input-section">
+                <p className="addInventoryItem__warehouse">Warehouse</p>
+                <select
+                  className="addInventoryItem__warehouse-select-input"
+                  name="warehouseName"
+                  placeholder="Select"
+                >
+                  {warehousesList.map((warehouse) => {
+                    return (
+                      <option value={warehouse?.$id} key={warehouse?.$id}>
+                        {warehouse?.warehouseName}
+                      </option>
+                    );
+                  })}
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div className="addInventoryItem__buttons-container">
+            <div className="addInventoryItem__cancel-btn-container">
+              <Link to={"/inventory/"} className="addInventoryItem__cancel-btn">
+                Cancel
+              </Link>
+            </div>
+
+            <div className="addInventoryItem__save-btn-container">
+              <button type="submit" className="addInventoryItem__save-btn">
+                Save
+              </button>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </form>
   );
 }

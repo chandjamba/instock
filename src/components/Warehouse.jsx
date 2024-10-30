@@ -11,8 +11,7 @@ export default function Warehouse() {
     async function fetchedWarehousesData() {
       const resp = await databases.listDocuments(
         import.meta.env.VITE_INSTOCK_DATABASE_ID,
-        import.meta.env.VITE_INSTOCK_WAREHOUSES_COLLECTION_ID,
-       
+        import.meta.env.VITE_INSTOCK_WAREHOUSES_COLLECTION_ID
       );
       const data = resp.documents;
       console.log(data);
