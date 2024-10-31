@@ -5,7 +5,7 @@ import { databases } from "../lib/appwrite";
 
 export default function WarehouseDetail() {
   const [warehouseDetail, setWarehouseDetail] = useState();
-  const [sameWarehouse, setSameWarehouse] = useState();
+  const [sameWarehouseInventories, setSameWarehouseInventories] = useState();
   const { warehouseId } = useParams();
 
   useEffect(() => {
@@ -30,13 +30,14 @@ export default function WarehouseDetail() {
         // Query.equal("", [""])
       )
       const inventoriesData = resp.documents;
-      
-      console.log(inventoriesData, "sameWarehouseData");
-      setSameWarehouse(inventoriesData);
+      console.log(inventoriesData);
+      const filteredInventoriesData = inventoriesData.filter((data) => data?.warehouses?.$id == "67202b9800281fc44cf9")
+      console.log(filteredInventoriesData, "sameWarehouseData");
+      setSameWarehouseInventories(filteredInventoriesData);
     }
     fetchSameWarehouseInventories();
   }, [warehouseId]);
-``
+
   return (
     <div className="warehouses">
       <div className="warehouse">
@@ -58,7 +59,7 @@ export default function WarehouseDetail() {
                 WAREHOUSE ADDRESS
               </p>
               <div className="warehouse__detail-address">
-                {warehouseDetail?.warehouseAddress}, {warehouseDetail?.warehouseName},{" "}
+                {warehouseDetail?.warehouseAddress}, {warehouseDetail?.warehouseCity},{" "}
                 {warehouseDetail?.warehouseCountry}
               </div>
             </div>
@@ -96,37 +97,37 @@ export default function WarehouseDetail() {
         </div>
       </div>
       <div className="warehouse__inventories">
-        {sameWarehouse?.map((warehouse) => {
+        {sameWarehouseInventories?.map((warehouseInventories) => {
           return (
-            <div className="warehouse__inventories-card" key={warehouse?.$id}>
+            <div className="warehouse__inventories-card" key={warehouseInventories?.$id}>
               <div className="warehouse__info-containers">
                 <div className="warehouse__info-container4">
                   <p className="warehouse__inventory-item-heading">
                     INVENTORY ITEM
                   </p>
                   <Link
-                    to={`/inventory/${warehouse?.$id}`}
+                    to={`/inventory/${warehouseInventories?.$id}`}
                     className="warehouse__inventory-item-name"
                   >
-                    {warehouse?.itemName}
+                    {warehouseInventories?.itemName}
                   </Link>
                   <p className="warehouse__inventory-category-heading">
                     CATEGORY
                   </p>
                   <div className="warehouse__inventory-category">
-                    {warehouse?.categories?.categoryName}
+                    {warehouseInventories?.categories?.categoryName}
                   </div>
                 </div>
                 <div className="warehouse__info-container5">
                   <p className="warehouse__inventory-status-heading">STATUS</p>
                   <div className="warehouse__inventory-status">
-                    {warehouse?.itemStatus}
+                    {warehouseInventories?.itemStatus}
                   </div>
                   <p className="warehouse__inventory-quantity-heading">
                     QUANTITY
                   </p>
                   <div className="warehouse__inventory-quantity">
-                    {warehouse?.itemQuantity}
+                    {warehouseInventories?.itemQuantity}
                   </div>
                 </div>
               </div>
