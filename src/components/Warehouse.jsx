@@ -64,7 +64,7 @@ export default function Warehouse() {
                   <div className="warehouse__info-box1">
                     <p className="warehouse__heading">WAREHOUSE</p>
                     <Link
-                      to={`/warehouse/${warehouse?.id}`}
+                      to={`/warehouse/${warehouse?.$id}`}
                       className="warehouse__location"
                     >
                       {warehouse?.warehouseName}

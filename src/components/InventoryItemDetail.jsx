@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import "./inventoryItemDetail.scss";
+import { databases } from "../lib/appwrite";
 
 export default function InventoryItemDetail() {
   const [inventoryItemDetail, setInventoryItemDetail] = useState();
@@ -8,11 +9,14 @@ export default function InventoryItemDetail() {
 
   useEffect(() => {
     async function fetchedInventoryItemData() {
-      const url = `https://instock-api-cj.onrender.com/api/inventories/${itemId}`;
-      const resp = await fetch(url);
-      const data = await resp.json();
-      console.log(data);
+      const resp = await databases.getDocument(
+        import.meta.env.VITE_INSTOCK_DATABASE_ID,
+        import.meta.env.VITE_INSTOCK_INVENTORIES_COLLECTION_ID,
+        itemId
+      )
+      const data = resp
       setInventoryItemDetail(data);
+      console.log(data);
     }
     fetchedInventoryItemData();
   }, [itemId]);
@@ -21,7 +25,7 @@ export default function InventoryItemDetail() {
       <div className="inventoryDet__item-details">
         <div className="inventoryDet__heading-card">
           <h1 className="inventoryDet__item-heading">
-            {inventoryItemDetail?.item_name}
+            {inventoryItemDetail?.itemName}
           </h1>
           <Link
             to={`/inventory/${itemId}/edit`}
@@ -34,7 +38,7 @@ export default function InventoryItemDetail() {
           <div className="inventoryDet__iteminfo-box1">
             <p className="inventoryDet__description-heading">DESCRIPTION</p>
             <div className="inventoryDet__item-description">
-              {inventoryItemDetail?.description}
+              {inventoryItemDetail?.itemDescription}
             </div>
           </div>
 
@@ -42,11 +46,11 @@ export default function InventoryItemDetail() {
             <div className="inventoryDet__iteminfo-box2">
               <p className="inventoryDet__category-heading">CATEGORY</p>
               <div className="inventoryDet__item-category">
-                {inventoryItemDetail?.category}
+                {inventoryItemDetail?.categories?.categoryName}
               </div>
               <p className="inventoryDet__status-heading">STATUS</p>
               <div className="inventoryDet__item-status">
-                {inventoryItemDetail?.status}
+                {inventoryItemDetail?.itemStatus}
               </div>
             </div>
 
@@ -56,11 +60,11 @@ export default function InventoryItemDetail() {
                 to={`/warehouse/${inventoryItemDetail?.warehouse_id}`}
                 className="inventoryDet__item-warehouse-location"
               >
-                {inventoryItemDetail?.warehouse_name}
+                {inventoryItemDetail?.warehouses?.warehouseName}
               </Link>
               <p className="inventoryDet__quantity-heading">QUANTITY</p>
               <div className="inventoryDet__item-quantity">
-                {inventoryItemDetail?.quantity}
+                {inventoryItemDetail?.itemQuantity}
               </div>
             </div>
           </div>

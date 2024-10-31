@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import "./warehouseDetail.scss";
+import { databases } from "../lib/appwrite";
 
 export default function WarehouseDetail() {
   const [warehouseDetail, setWarehouseDetail] = useState();
@@ -8,33 +9,40 @@ export default function WarehouseDetail() {
   const { warehouseId } = useParams();
 
   useEffect(() => {
-    async function fetchedWarehousesDetail() {
-      const url = `https://instock-api-cj.onrender.com/api/warehouses/${warehouseId}`;
-      const resp = await fetch(url);
-      const data = await resp.json();
+    async function fetchSameWarehousesDetail() {
+      const resp = await databases.getDocument(
+        import.meta.env.VITE_INSTOCK_DATABASE_ID,
+        import.meta.env.VITE_INSTOCK_WAREHOUSES_COLLECTION_ID,
+        warehouseId
+      )
+      const data = resp
       console.log(data);
       setWarehouseDetail(data);
     }
-    fetchedWarehousesDetail();
+    fetchSameWarehousesDetail();
   }, [warehouseId]);
 
   useEffect(() => {
-    async function fetchedSameWarehouse() {
-      const url2 = `https://instock-api-cj.onrender.com/api/warehouses/${warehouseId}/inventories`;
-      const resp = await fetch(url2);
-      const data = await resp.json();
-      console.log(data);
-      setSameWarehouse(data);
+    async function fetchSameWarehouseInventories() {
+      const resp = await databases.listDocuments(
+        import.meta.env.VITE_INSTOCK_DATABASE_ID,
+        import.meta.env.VITE_INSTOCK_INVENTORIES_COLLECTION_ID,
+        // Query.equal("", [""])
+      )
+      const inventoriesData = resp.documents;
+      
+      console.log(inventoriesData, "sameWarehouseData");
+      setSameWarehouse(inventoriesData);
     }
-    fetchedSameWarehouse();
+    fetchSameWarehouseInventories();
   }, [warehouseId]);
-
+``
   return (
     <div className="warehouses">
       <div className="warehouse">
         <div className="warehouse__heading-card">
           <h1 className="warehouse__main-heading">
-            {warehouseDetail?.warehouse_name}
+            {warehouseDetail?.warehouseName}
           </h1>
           <Link
             to={`/warehouse/${warehouseId}/edit`}
@@ -50,8 +58,8 @@ export default function WarehouseDetail() {
                 WAREHOUSE ADDRESS
               </p>
               <div className="warehouse__detail-address">
-                {warehouseDetail?.address}, {warehouseDetail?.warehouse_name},{" "}
-                {warehouseDetail?.country}
+                {warehouseDetail?.warehouseAddress}, {warehouseDetail?.warehouseName},{" "}
+                {warehouseDetail?.warehouseCountry}
               </div>
             </div>
 
@@ -62,10 +70,10 @@ export default function WarehouseDetail() {
                 </p>
                 <div className="warehouse__detail-contact-person">
                   <p className="warehouse__detail-contact-name">
-                    {warehouseDetail?.contact_name}
+                    {warehouseDetail?.warehouseContactName}
                   </p>
                   <p className="warehouse__detail-contact-position">
-                    {warehouseDetail?.contact_position}
+                    {warehouseDetail?.warhouseContactPosition}
                   </p>
                 </div>
               </div>
@@ -76,10 +84,10 @@ export default function WarehouseDetail() {
                 </p>
                 <div className="warehouse__detail-contact-info">
                   <p className="warehouse__detail-contact-phone">
-                    {warehouseDetail?.contact_phone}
+                    {warehouseDetail?.warehousePhoneNumber}
                   </p>
                   <p className="warehouse__detail-contact-email">
-                    {warehouseDetail?.contact_email}
+                    {warehouseDetail?.warehouseContactEmail}
                   </p>
                 </div>
               </div>
@@ -90,35 +98,35 @@ export default function WarehouseDetail() {
       <div className="warehouse__inventories">
         {sameWarehouse?.map((warehouse) => {
           return (
-            <div className="warehouse__inventories-card" key={warehouse?.id}>
+            <div className="warehouse__inventories-card" key={warehouse?.$id}>
               <div className="warehouse__info-containers">
                 <div className="warehouse__info-container4">
                   <p className="warehouse__inventory-item-heading">
                     INVENTORY ITEM
                   </p>
                   <Link
-                    to={`/inventory/${warehouse?.id}`}
+                    to={`/inventory/${warehouse?.$id}`}
                     className="warehouse__inventory-item-name"
                   >
-                    {warehouse?.item_name}
+                    {warehouse?.itemName}
                   </Link>
                   <p className="warehouse__inventory-category-heading">
                     CATEGORY
                   </p>
                   <div className="warehouse__inventory-category">
-                    {warehouse?.category}
+                    {warehouse?.categories?.categoryName}
                   </div>
                 </div>
                 <div className="warehouse__info-container5">
                   <p className="warehouse__inventory-status-heading">STATUS</p>
                   <div className="warehouse__inventory-status">
-                    {warehouse?.status}
+                    {warehouse?.itemStatus}
                   </div>
                   <p className="warehouse__inventory-quantity-heading">
                     QUANTITY
                   </p>
                   <div className="warehouse__inventory-quantity">
-                    {warehouse?.quantity}
+                    {warehouse?.itemQuantity}
                   </div>
                 </div>
               </div>
