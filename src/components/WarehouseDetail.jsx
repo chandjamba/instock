@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import "./warehouseDetail.scss";
 import { databases } from "../lib/appwrite";
+import { Query } from "appwrite";
 
 export default function WarehouseDetail() {
   const [warehouseDetail, setWarehouseDetail] = useState();
@@ -14,8 +15,8 @@ export default function WarehouseDetail() {
         import.meta.env.VITE_INSTOCK_DATABASE_ID,
         import.meta.env.VITE_INSTOCK_WAREHOUSES_COLLECTION_ID,
         warehouseId
-      )
-      const data = resp
+      );
+      const data = resp;
       console.log(data);
       setWarehouseDetail(data);
     }
@@ -27,13 +28,34 @@ export default function WarehouseDetail() {
       const resp = await databases.listDocuments(
         import.meta.env.VITE_INSTOCK_DATABASE_ID,
         import.meta.env.VITE_INSTOCK_INVENTORIES_COLLECTION_ID,
-        // Query.equal("", [""])
-      )
+        [Query.equal("warehouseId", [warehouseId])]
+      );
       const inventoriesData = resp.documents;
+      // await Promise.all([
+      //   inventoriesData?.map((inventory) => {
+      //     const {
+      //       $collectionId,
+      //       $createdAt,
+      //       $databaseId,
+      //       $id,
+      //       $permissions,
+      //       $updatedAt,
+      //       warehouses,
+      //       categories,
+      //       ...rest
+      //     } = inventory;
+      //     return databases.updateDocument(
+      //       import.meta.env.VITE_INSTOCK_DATABASE_ID,
+      //       import.meta.env.VITE_INSTOCK_INVENTORIES_COLLECTION_ID,
+      //       $id,
+      //       { ...rest, warehouseId: inventory?.warehouses?.$id }
+      //     );
+      //   }),
+      // ]);
       console.log(inventoriesData);
-      const filteredInventoriesData = inventoriesData.filter((data) => data?.warehouses?.$id == "67202b9800281fc44cf9")
-      console.log(filteredInventoriesData, "sameWarehouseData");
-      setSameWarehouseInventories(filteredInventoriesData);
+
+      console.log(inventoriesData, "sameWarehouseData");
+      setSameWarehouseInventories(inventoriesData);
     }
     fetchSameWarehouseInventories();
   }, [warehouseId]);
@@ -59,7 +81,8 @@ export default function WarehouseDetail() {
                 WAREHOUSE ADDRESS
               </p>
               <div className="warehouse__detail-address">
-                {warehouseDetail?.warehouseAddress}, {warehouseDetail?.warehouseCity},{" "}
+                {warehouseDetail?.warehouseAddress},{" "}
+                {warehouseDetail?.warehouseCity},{" "}
                 {warehouseDetail?.warehouseCountry}
               </div>
             </div>
@@ -99,7 +122,10 @@ export default function WarehouseDetail() {
       <div className="warehouse__inventories">
         {sameWarehouseInventories?.map((warehouseInventories) => {
           return (
-            <div className="warehouse__inventories-card" key={warehouseInventories?.$id}>
+            <div
+              className="warehouse__inventories-card"
+              key={warehouseInventories?.$id}
+            >
               <div className="warehouse__info-containers">
                 <div className="warehouse__info-container4">
                   <p className="warehouse__inventory-item-heading">

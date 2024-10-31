@@ -73,7 +73,8 @@ export default function AddInventoryItem() {
           itemStatus: event.target.itemStatus.value,
           itemQuantity: parseInt(event.target.quantity.value),
           categories: event.target.category.value,
-          warehouses: event.target.warehouse.value
+          warehouses: event.target.warehouseId.value,
+          warehouseId: event.target.warehouseId.value,
         }
       );
     } catch (error) {
@@ -185,7 +186,7 @@ export default function AddInventoryItem() {
                 <p className="addInventoryItem__warehouse">Warehouse</p>
                 <select
                   className="addInventoryItem__warehouse-select-input"
-                  name="warehouse"
+                  name="warehouseId"
                   placeholder="Select"
                 >
                   {warehousesList.map((warehouse) => {
