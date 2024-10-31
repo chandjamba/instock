@@ -41,7 +41,11 @@ export default function AddInventoryItem() {
 
   useEffect(() => {
     async function fetchWarehouseAndCategoriesAndInventoriesData() {
-      const [fetchedInventoriesData, fetchedWarehousesData, fetchedCategoriesData] = await Promise.all([
+      const [
+        fetchedInventoriesData,
+        fetchedWarehousesData,
+        fetchedCategoriesData,
+      ] = await Promise.all([
         fetchCategoriesData(),
         fetchWarehousesData(),
         fetchInventoriesData(),
@@ -51,7 +55,7 @@ export default function AddInventoryItem() {
       setWarehousesList(fetchedWarehousesData);
       console.log(fetchedWarehousesData, "warehouseData");
       setCategories(fetchedCategoriesData);
-      console.log(fetchedCategoriesData, "categoriesData")
+      console.log(fetchedCategoriesData, "categoriesData");
     }
     fetchWarehouseAndCategoriesAndInventoriesData();
   }, []);
@@ -67,8 +71,9 @@ export default function AddInventoryItem() {
           itemName: event.target.name.value,
           itemDescription: event.target.description.value,
           itemStatus: event.target.itemStatus.value,
-          itemQuantity: event.target.quantity.value,
-          itemCategory: event.target.category.value,
+          itemQuantity: parseInt(event.target.quantity.value),
+          categories: event.target.category.value,
+          warehouses: event.target.warehouse.value
         }
       );
     } catch (error) {
@@ -150,12 +155,16 @@ export default function AddInventoryItem() {
 
                 <div className="addInventoryItem__status-inputs">
                   <label>
-                    <input type="radio" name="itemStatus"  />
+                    <input type="radio" name="itemStatus" value="IN_STOCK" />
                     <p>In Stock</p>
                   </label>
 
                   <label>
-                    <input type="radio" name="itemStatus"  />
+                    <input
+                      type="radio"
+                      name="itemStatus"
+                      value="OUT_OF_STOCK"
+                    />
                     <p>Out of Stock</p>
                   </label>
                 </div>
@@ -176,7 +185,7 @@ export default function AddInventoryItem() {
                 <p className="addInventoryItem__warehouse">Warehouse</p>
                 <select
                   className="addInventoryItem__warehouse-select-input"
-                  name="warehouseName"
+                  name="warehouse"
                   placeholder="Select"
                 >
                   {warehousesList.map((warehouse) => {
