@@ -28,6 +28,7 @@ export default function WarehouseDelete() {
       warehouseId
     );
     console.log(resp, "warehouse Deleted");
+    setWarehouseDelete(resp);
   }
   // console.log(warehouseId, "warehouseId");
   return (

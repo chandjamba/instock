@@ -1,10 +1,11 @@
 import { useState } from "react";
 import "./addWarehouse.scss/";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ID, databases } from "../lib/appwrite";
 
 export default function AddWarehouse() {
   const [addWarehouse, setAddWarehouse] = useState();
+  const navigate = useNavigate();
 
   const submitButtonHandler = async (event) => {
     event.preventDefault();
@@ -27,6 +28,7 @@ export default function AddWarehouse() {
     } catch (error) {
       console.log(error);
     }
+    navigate("/");
   };
 
   return (
