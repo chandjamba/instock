@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import "./inventory.scss";
 import { Link } from "react-router-dom";
 import { databases } from "../lib/appwrite";
+import { Query } from "appwrite";
 
 export default function Inventory() {
   const [inventories, setInventories] = useState();
@@ -12,7 +13,7 @@ export default function Inventory() {
       const resp = await databases.listDocuments(
         import.meta.env.VITE_INSTOCK_DATABASE_ID,
         import.meta.env.VITE_INSTOCK_INVENTORIES_COLLECTION_ID,
-        []
+        [Query.limit(500)]
       );
       const data = resp.documents;
       console.log(data);
