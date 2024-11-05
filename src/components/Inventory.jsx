@@ -10,14 +10,38 @@ export default function Inventory() {
 
   useEffect(() => {
     async function fetchedInventoriesData() {
-      const resp = await databases.listDocuments(
+      const page1 = await databases.listDocuments(
         import.meta.env.VITE_INSTOCK_DATABASE_ID,
         import.meta.env.VITE_INSTOCK_INVENTORIES_COLLECTION_ID,
-        [Query.limit(500)]
+        [
+          Query.limit(25),
+          Query.offset(0)
+      ]
       );
-      const data = resp.documents;
-      console.log(data);
-      setInventories(data);
+      // page#2 for inventorioes. //
+      const page2 = await databases.listDocuments(
+        import.meta.env.VITE_INSTOCK_DATABASE_ID,
+        import.meta.env.VITE_INSTOCK_INVENTORIES_COLLECTION_ID,
+        [
+          Query.limit(50),
+          Query.offset(25)
+      ]
+      );
+      // page#3 for inventorioes. //
+      const page3 = await databases.listDocuments(
+        import.meta.env.VITE_INSTOCK_DATABASE_ID,
+        import.meta.env.VITE_INSTOCK_INVENTORIES_COLLECTION_ID,
+        [
+          Query.limit(50),
+          Query.offset(75)
+      ]
+      );
+      const page1Data = page1.documents;
+      const page2Data = page2.documents;
+      const page3Data = page3.documents;
+
+      console.log([...page1Data, ...page2Data, ...page3Data]);
+      setInventories([...page1Data, ...page2Data, ...page3Data]);
     }
     fetchedInventoriesData();
   }, []);

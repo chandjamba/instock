@@ -1,25 +1,14 @@
 import { useEffect, useState } from "react";
 import "./warehouseDelete.scss";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { databases } from "../lib/appwrite";
 
 export default function WarehouseDelete() {
   const [warehouseDelete, setWarehouseDelete] = useState();
   const { warehouseId } = useParams();
+  const navigate = useNavigate();
 
-  // useEffect(() => {
-  //   async function fetchWarehouseDelete() {
-  //     const resp = await databases.getDocument(
-  //       import.meta.env.VITE_INSTOCK_DATABASE_ID,
-  //       import.meta.env.VITE_INSTOCK_WAREHOUSES_COLLECTION_ID,
-  //       warehouseId
-  //     );
-  //     const data = resp;
-  //     console.log(data);
-  //     setWarehouseDelete(data, "warehouseData to Delete");
-  //   }
-  //   fetchWarehouseDelete();
-  // }, [warehouseId]);
+  
 
   async function deleteWarehouseButtonHandler() {
     const resp = await databases.deleteDocument(
@@ -29,6 +18,7 @@ export default function WarehouseDelete() {
     );
     console.log(resp, "warehouse Deleted");
     setWarehouseDelete(resp);
+    navigate("/")
   }
   // console.log(warehouseId, "warehouseId");
   return (

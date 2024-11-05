@@ -1,11 +1,12 @@
 import { useEffect, useRef, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import "./editWarehouse.scss";
 import { databases } from "../lib/appwrite";
 
 export default function EditWarehouse() {
   const [editWarehouse, setEditWarehouse] = useState();
   const { warehouseId } = useParams();
+  const navigate = useNavigate();
   const warehouseName = useRef();
   const warehouseAddress = useRef();
   const warehouseCity = useRef();
@@ -49,6 +50,7 @@ export default function EditWarehouse() {
     const data = resp;
     console.log(data, "editedData");
     setEditWarehouse(data);
+    navigate("/")
   };
 
   return (
