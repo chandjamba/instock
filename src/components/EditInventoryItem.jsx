@@ -130,7 +130,7 @@ export default function EditInventoryItem() {
                 <select
                   className="editInventoryItem__category-input"
                   placeholder="Select"
-                  defaultValue={editInventoryItem?.categories?.$id}
+                  defaultValue={editInventoryItem?.categories?.categoryName}
                   ref={categories}
                 >
                   {categoriesList?.map((categories) => {
